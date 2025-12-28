@@ -1,7 +1,18 @@
 const middag = document.getElementById("middag");
 const generate = document.getElementById("generate");
 
-const dinners = ['Hamburger', 'Pizza', 'Taco'];
+const dinners = [
+  'Hamburger',
+  'Pizza',
+  'Taco',
+  'Fiskepinner',
+  'Fiskeburger',
+  'Pølselapskaus',
+  'Fiskeboller',
+  'Spaghetti med kjøttsaus',
+  'Pasta Carbonara',
+  'Fleskepannekake'
+];
 
 function getRandomDinner(dinnerList) {
   const dinnerIndex = Math.floor(Math.random() * dinnerList.length);
