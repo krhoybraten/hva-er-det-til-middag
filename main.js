@@ -1,6 +1,6 @@
-import dinnerData from './data/dinnerData.js'
-import { getTags } from "./api/tags.js";
-import { renderTagCheckboxes } from "./ui/renderTags.js";
+import {dinnerData} from './data/dinnerData.js'
+import {getTags} from "./api/tags.js";
+import {renderTagCheckboxes} from "./ui/renderTags.js";
 
 const middag = document.getElementById("middag");
 const generate = document.getElementById("generate");
