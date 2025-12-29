@@ -1,3 +1,5 @@
+import dinnerData from './modules/dinnerData.js'
+
 const middag = document.getElementById("middag");
 const generate = document.getElementById("generate");
 
