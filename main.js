@@ -11,7 +11,7 @@ renderTagCheckboxes({
   tagContainer,
   tags,
   onChange: () => {
-    const selected = [...container.querySelectorAll("input:checked")]
+    const selected = [...tagContainer.querySelectorAll("input:checked")]
       .map(cb => cb.value);
 
     console.log("Selected tags:", selected);
