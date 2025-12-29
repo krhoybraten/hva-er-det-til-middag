@@ -7,7 +7,7 @@ const middag = document.getElementById("middag");
 const generate = document.getElementById("generate");
 const tagContainer = document.getElementById("facets");
 const tags = await getTags();
-const selectedTags = []
+let selectedTags = []
 
 renderTagCheckboxes({
   tagContainer,
@@ -25,5 +25,5 @@ function replaceText(element, newText) {
 }
 
 generate.addEventListener('click', () => {
-  replaceText(middag, getRandomDinner(dinners, selected));
+  replaceText(middag, getRandomDinner(selected).name);
 });
