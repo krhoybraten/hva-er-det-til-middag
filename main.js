@@ -1,7 +1,22 @@
 import dinnerData from './modules/dinnerData.js'
+import { getTags } from "./api/tags.js";
+import { renderTagCheckboxes } from "./ui/renderTags.js";
 
 const middag = document.getElementById("middag");
 const generate = document.getElementById("generate");
+const tagContainer = document.getElementById("facets");
+const tags = await getTags();
+
+renderTagCheckboxes({
+  tagContainer,
+  tags,
+  onChange: () => {
+    const selected = [...container.querySelectorAll("input:checked")]
+      .map(cb => cb.value);
+
+    console.log("Selected tags:", selected);
+  }
+});
 
 const dinners = [
   'Hamburger',
