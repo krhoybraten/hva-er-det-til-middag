@@ -8,5 +8,7 @@ export const dinnerData = [
   {name: 'Fiskeboller', tags: ['fisk', 'rask']},
   {name: 'Spaghetti med kjøttsaus', tags: ['oksekjøtt', 'rask']},
   {name: 'Pasta Carbonara', tags: ['svinekjøtt', 'rask']},
-  {name: 'Fleskepannekake', tags: ['svinekjøtt']}
+  {name: 'Fleskepannekake', tags: ['svinekjøtt']},
+  {name: 'Bygg selv-salat', tags: ['kylling']},
+  {name: 'Kyllingvinger', tags: ['kylling', 'helg']}
 ];
