@@ -1,5 +1,6 @@
 export function extractDistinctTags(dinnerData) {
-  return [...new Set(dinnerData.flatMap(d => d.tags))];
+  return [...new Set(dinnerData.flatMap(d => d.tags))].sort((a, b) =>
+  a.localeCompare(b, "nb", { sensitivity: "base" });
 }
 
 export function findRandomDinnerWithTags(dinners, requiredTags = []) {
