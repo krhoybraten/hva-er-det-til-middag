@@ -1,4 +1,4 @@
-const dinnerData = [
+export const dinnerData = [
   {name: 'Hamburger', tags: ['helg', 'oksekjøtt', 'rask']},
   {name: 'Pizza', tags: ['helg']},
   {name: 'Taco', tags: ['helg', 'oksekjøtt']},
