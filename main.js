@@ -16,7 +16,7 @@ renderTagCheckboxes({
     selectedTags = [...tagContainer.querySelectorAll("input:checked")]
       .map(cb => cb.value);
 
-    console.log("Selected tags:", selected);
+    console.log("Selected tags:", selectedTags);
   }
 });
 
@@ -25,5 +25,5 @@ function replaceText(element, newText) {
 }
 
 generate.addEventListener('click', () => {
-  replaceText(middag, getRandomDinner(selected).name);
+  replaceText(middag, getRandomDinner(selectedTags).name);
 });
