@@ -1,10 +1,10 @@
 export function renderTagCheckboxes({
-  container,
+  tagContainer,
   tags,
   name = "tags",
   onChange
 }) {
-  container.innerHTML = "";
+  tagContainer.innerHTML = "";
 
   for (const tag of tags) {
     const id = `${name}-${tag}`;
@@ -25,6 +25,6 @@ export function renderTagCheckboxes({
     label.appendChild(checkbox);
     label.append(` ${tag}`);
 
-    container.appendChild(label);
+    tagContainer.appendChild(label);
   }
 }
