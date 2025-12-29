@@ -25,5 +25,6 @@ function replaceText(element, newText) {
 }
 
 generate.addEventListener('click', () => {
-  replaceText(middag, getRandomDinner(selectedTags).name);
+  const randomDinner = getRandomDinner(selectedTags).name;
+  replaceText(middag, !randomDinner ? 'Fant ingen middager', randomDinner);
 });
