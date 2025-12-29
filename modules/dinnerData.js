@@ -6,7 +6,7 @@ export const dinnerData = [
   {name: 'Fiskeburger', tags: ['fisk', 'rask']},
   {name: 'Pølselapskaus', tags: ['svinekjøtt']},
   {name: 'Fiskeboller', tags: ['fisk', 'rask']},
-  {name: 'Spaghetti med kjøttsaus', tags: ['oksekjøtt, 'rask']},
-  {name: 'Pasta Carbonara', tags: ['svinekjøtt, 'rask']},
+  {name: 'Spaghetti med kjøttsaus', tags: ['oksekjøtt', 'rask']},
+  {name: 'Pasta Carbonara', tags: ['svinekjøtt', 'rask']},
   {name: 'Fleskepannekake', tags: ['svinekjøtt']}
 ];
