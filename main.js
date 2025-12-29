@@ -1,4 +1,4 @@
-import dinnerData from './modules/dinnerData.js'
+import dinnerData from './data/dinnerData.js'
 import { getTags } from "./api/tags.js";
 import { renderTagCheckboxes } from "./ui/renderTags.js";
 
