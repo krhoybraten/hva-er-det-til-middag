@@ -54,7 +54,7 @@ randomDinnerBtn.addEventListener('click', () => {
     replaceText(middag, 'Fant ingen middager')
   } else {
     dinners = [one]
-    renderDinnerResult({ dinnerResultContainer, dinners })
+    renderDinnerResult({ dinnerResultContainer, dinners, onAddToPlan: addToPlan })
   }
 })
 
