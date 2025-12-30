@@ -1,10 +1,231 @@
-/* Make dinner plan easier to spot on desktop */
+/* css/style.css */
+
+/* ---------- Theme (flat, no gradients) ---------- */
+:root{
+  --bg: #0f172a;         /* slate-900 */
+  --panel: #111827;      /* gray-900 */
+  --chip: #1f2937;       /* gray-800 */
+  --text: #f9fafb;
+  --muted: #9ca3af;
+  --border: #374151;
+  --accent: #8b5cf6;     /* violet */
+  --accent2: #22c55e;    /* green */
+  --danger: #ef4444;     /* red */
+
+  --radius: 16px;
+  --shadow: 0 10px 24px rgba(0,0,0,.35);
+}
+
+@media (prefers-color-scheme: light){
+  :root{
+    --bg: #f6f7fb;
+    --panel: #ffffff;
+    --chip: #f3f4f6;
+    --text: #111827;
+    --muted: #4b5563;
+    --border: #e5e7eb;
+    --shadow: 0 10px 24px rgba(0,0,0,.08);
+  }
+}
+
+/* ---------- Base ---------- */
+*{ box-sizing: border-box; }
+
+html, body{ height: 100%; }
+
+body{
+  margin: 0;
+  padding: 32px 18px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------- Header ---------- */
+#header{
+  max-width: 980px;
+  margin: 0 auto 18px;
+  font-size: clamp(1.9rem, 3vw, 2.4rem);
+  font-weight: 850;
+  letter-spacing: .2px;
+}
+
+#header::after{
+  content:"";
+  display:block;
+  height: 1px;
+  margin-top: 12px;
+  background: var(--border);
+  opacity: .85;
+}
+
+/* ---------- Shared card look ---------- */
+#facets,
+#middag,
 #dinner-plan{
+  max-width: 980px;
+  margin: 0 auto 18px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Facets (chips) ---------- */
+#facets{
+  padding: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Your JS sets label.display = "block" inline, so override it */
+#facets label{
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  background: var(--chip);
+  border: 1px solid var(--border);
+
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.05rem;
+  line-height: 1.1;
+
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+
+#facets label:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--border), var(--text) 18%);
+}
+
+#facets input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+/* Selected chip */
+#facets label:has(input:checked){
+  background: color-mix(in srgb, var(--accent), var(--chip) 82%);
+  border-color: color-mix(in srgb, var(--accent), var(--border) 35%);
+}
+
+/* ---------- Buttons row ---------- */
+#search-buttons{
+  max-width: 980px;
+  margin: 0 auto 18px;
+
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+#search-buttons button{
+  flex: 1;
+  min-width: 220px;
+
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+
+  background: var(--panel);
+  color: var(--text);
+
+  font-size: 1.1rem;
+  font-weight: 850;
+  cursor: pointer;
+
+  box-shadow: var(--shadow);
+  transition: transform .12s ease, border-color .12s ease, filter .12s ease;
+}
+
+#search-buttons button:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--border), var(--text) 18%);
+}
+
+#search-buttons button:active{
+  transform: translateY(0);
+  filter: brightness(.98);
+}
+
+/* Make the "random" button slightly accented without gradients */
+#random-dinner{
+  border-color: color-mix(in srgb, var(--accent), var(--border) 45%) !important;
+}
+
+/* ---------- Results (#middag) ---------- */
+#middag{
+  padding: 18px;
+}
+
+#middag ul{
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+#middag li{
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--panel), var(--chip) 22%);
+}
+
+#middag h2, #middag h3{
+  margin: 0 0 10px 0;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+#middag a{
+  color: color-mix(in srgb, var(--accent), var(--text) 18%);
+  text-decoration: none;
+}
+#middag a:hover{ text-decoration: underline; }
+
+#middag li ul{
+  margin-top: 10px;
+  padding-left: 1.2rem;
+  list-style: disc;
+  display: block;
+}
+#middag li ul li{
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+/* Buttons inside results (e.g. "Legg til i middagplan") */
+#middag button{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent), var(--border) 45%);
+  background: var(--accent);
+  color: white;
+  font-weight: 850;
+  cursor: pointer;
+}
+#middag button:hover{ filter: brightness(1.05); }
+
+/* ---------- Dinner plan (#dinner-plan) ---------- */
+#dinner-plan{
+  padding: 18px;
   position: relative;
   border-color: color-mix(in srgb, var(--accent), var(--border) 55%);
 }
 
-/* Accent bar at the top */
+/* Accent bar to make it easy to spot */
 #dinner-plan::before{
   content:"";
   position: absolute;
@@ -12,11 +233,11 @@
   right: 0;
   top: 0;
   height: 6px;
-  background: var(--accent);
+  background: var(--accent2);
   border-radius: var(--radius) var(--radius) 0 0;
 }
 
-/* Add a visible title even if your JS hasn’t rendered yet */
+/* If empty, still show a visible label */
 #dinner-plan:empty{
   padding: 18px;
 }
@@ -26,40 +247,125 @@
   font-size: 1.4rem;
   font-weight: 900;
   letter-spacing: .2px;
-  margin-top: 6px;
+  margin-top: 8px;
+  color: var(--text);
+  opacity: .9;
 }
 
-/* Desktop layout: show results + plan side-by-side */
+#dinner-plan h2{
+  margin: 0 0 12px 0;
+  font-size: 1.4rem;
+}
+
+#dinner-plan p{
+  margin: 0;
+  color: var(--muted);
+}
+
+#dinner-plan ul{
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+#dinner-plan li{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--panel), var(--chip) 22%);
+}
+
+#dinner-plan li span{
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+/* Remove button */
+#dinner-plan button{
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--danger), var(--border) 45%);
+  background: transparent;
+  color: color-mix(in srgb, var(--danger), var(--text) 18%);
+  font-weight: 850;
+  cursor: pointer;
+}
+#dinner-plan button:hover{
+  background: color-mix(in srgb, var(--danger), transparent 88%);
+}
+
+/* ---------- Accessibility ---------- */
+:focus-visible{
+  outline: 3px solid color-mix(in srgb, var(--accent), white 25%);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* ---------- Desktop layout: results + plan side-by-side ---------- */
 @media (min-width: 980px){
   body{
     max-width: 1200px;
     margin: 0 auto;
-  }
 
-  /* Turn the page into a simple two-column grid */
-  body{
     display: grid;
     grid-template-columns: 1fr 360px;
     gap: 18px;
   }
 
-  /* Make existing sections span full width where it makes sense */
   #header,
   #facets,
   #search-buttons{
     grid-column: 1 / -1;
   }
 
-  /* Put results left, plan right */
   #middag{
     grid-column: 1;
   }
+
   #dinner-plan{
     grid-column: 2;
     align-self: start;
-
-    /* Optional: keep it visible while scrolling */
     position: sticky;
     top: 18px;
+  }
+
+  /* Keep the cards full-width inside the grid */
+  #facets, #middag, #dinner-plan{
+    max-width: none;
+    margin: 0;
+  }
+}
+
+/* ---------- Mobile: bigger text + stacked layout ---------- */
+@media (max-width: 520px){
+  body{ padding: 26px 14px; }
+
+  #facets label{
+    width: 100%;
+    justify-content: space-between;
+    padding: 14px 16px;
+    font-size: 1.1rem;
+    border-radius: 14px;
+  }
+
+  #search-buttons{
+    flex-direction: column;
+  }
+
+  #search-buttons button{
+    min-width: 0;
+    font-size: 1.15rem;
+    padding: 16px;
+  }
+
+  #middag h2, #middag h3{
+    font-size: 1.5rem;
   }
 }
