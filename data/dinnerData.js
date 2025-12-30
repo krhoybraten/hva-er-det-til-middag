@@ -32,5 +32,5 @@ export const dinnerData = [
   { name: 'Frossenpizza', emoji: '🍕', tags: ['svinekjøtt', 'oksekjøtt', 'rask'] },
   { name: 'Pasta med pesto', emoji: '🌿', tags: ['svinekjøtt', 'oksekjøtt', 'fisk', 'pasta', 'rask', 'vegetar'] },
   { name: 'Chicken nuggets', emoji: '🍗', tags: ['kylling', 'rask']},
-  { name: 'Finnbiff', emoji: '🦌', tags: ['vilt']
+  { name: 'Finnbiff', emoji: '🦌', tags: ['vilt']}]
 ];
