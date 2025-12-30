@@ -2,7 +2,7 @@ import {dinnerData} from './data/dinnerData.js'
 import {getTags} from './api/tags.js';
 import {getRandomDinner} from './api/randomDinner.js';
 import {renderTagCheckboxes} from './ui/renderTags.js';
-import {renderDinnerResults} from './ui/renderdinnerResults.js';
+import {renderDinnerResults} from './ui/renderDinnerResults.js';
 
 const middag = document.getElementById('middag');
 const generate = document.getElementById('generate');
