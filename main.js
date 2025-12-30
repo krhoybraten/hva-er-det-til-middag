@@ -5,7 +5,8 @@ import {renderTagCheckboxes} from './ui/renderTags.js';
 import {renderDinnerResult} from './ui/renderDinnerResult.js';
 
 const middag = document.getElementById('middag');
-const generate = document.getElementById('generate');
+const search = document.getElementbyId('search');
+const randomDinner = document.getElementById('random-dinner');
 const tagContainer = document.getElementById('facets');
 const dinnerResultContainer = document.getElementById('middag');
 const tags = await getTags();
@@ -27,12 +28,20 @@ function replaceText(element, newText) {
   element.textContent = newText;
 }
 
-generate.addEventListener('click', () => {
+search.addEventListener('click', () => {
+  const dinners = getdinnersByTags(selectedTags);
+  if(!dinnerResult.length) {
+    replaceText(middag, 'Fant ingen middager')
+  } else {
+    renderDinnerResult({dinnerResultContainer, dinners})
+  }
+
+randomDinner.addEventListener('click', () => {
   const randomDinner = getRandomDinner(selectedTags);
   if(!randomDinner) {
     replaceText(middag, 'Fant ingen middager')
   } else {
-    dinners = [randomDinner.name]
+    dinners = [randomDinner]
     renderDinnerResult({dinnerResultContainer, dinners});
   }
 });
