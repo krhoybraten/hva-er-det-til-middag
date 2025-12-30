@@ -112,7 +112,7 @@ body{
   /* no-op */
 }
 
-/* ===== Button ===== */
+/* ===== Buttons ===== */
 button {
   max-width: 860px;
   width: 100%;
@@ -145,6 +145,10 @@ button:active{
 }
 
 /* ===== Result ===== */
+#middag ul {
+  padding: 0px;
+}
+
 #middag ul li {
   padding: 22px 18px;
   text-align: center;
