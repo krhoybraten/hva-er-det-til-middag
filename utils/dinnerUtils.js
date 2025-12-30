@@ -15,7 +15,7 @@ export function findRandomDinnerWithTags(dinners, requiredTags = []) {
   return matches[index];
 }
 
-export function findDinnersByTags(dinners, requiredTags = [] {
+export function findDinnersByTags(dinners, requiredTags = []) {
   const matches = dinners.filter(dinner =>
     requiredTags.every(tag => dinner.tags.includes(tag))
   );
