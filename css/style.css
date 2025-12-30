@@ -2,15 +2,15 @@
 
 /* ---------- Theme (flat, no gradients) ---------- */
 :root{
-  --bg: #0f172a;         /* slate-900 */
-  --panel: #111827;      /* gray-900 */
-  --chip: #1f2937;       /* gray-800 */
+  --bg: #0f172a;
+  --panel: #111827;
+  --chip: #1f2937;
   --text: #f9fafb;
   --muted: #9ca3af;
   --border: #374151;
-  --accent: #8b5cf6;     /* violet */
-  --accent2: #22c55e;    /* green */
-  --danger: #ef4444;     /* red */
+  --accent: #8b5cf6;
+  --accent2: #22c55e;
+  --danger: #ef4444;
 
   --radius: 16px;
   --shadow: 0 10px 24px rgba(0,0,0,.35);
@@ -79,23 +79,18 @@ body{
   gap: 10px;
 }
 
-/* Your JS sets label.display = "block" inline, so override it */
 #facets label{
   display: inline-flex !important;
   align-items: center;
   gap: 10px;
-
   padding: 10px 14px;
   border-radius: 999px;
-
   background: var(--chip);
   border: 1px solid var(--border);
-
   cursor: pointer;
   user-select: none;
   font-size: 1.05rem;
   line-height: 1.1;
-
   transition: transform .12s ease, background .12s ease, border-color .12s ease;
 }
 
@@ -111,7 +106,6 @@ body{
   accent-color: var(--accent);
 }
 
-/* Selected chip */
 #facets label:has(input:checked){
   background: color-mix(in srgb, var(--accent), var(--chip) 82%);
   border-color: color-mix(in srgb, var(--accent), var(--border) 35%);
@@ -121,7 +115,6 @@ body{
 #search-buttons{
   max-width: 980px;
   margin: 0 auto 18px;
-
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
@@ -130,18 +123,14 @@ body{
 #search-buttons button{
   flex: 1;
   min-width: 220px;
-
   padding: 14px 16px;
   border-radius: 14px;
   border: 1px solid var(--border);
-
   background: var(--panel);
   color: var(--text);
-
   font-size: 1.1rem;
   font-weight: 850;
   cursor: pointer;
-
   box-shadow: var(--shadow);
   transition: transform .12s ease, border-color .12s ease, filter .12s ease;
 }
@@ -156,7 +145,6 @@ body{
   filter: brightness(.98);
 }
 
-/* Make the "random" button slightly accented without gradients */
 #random-dinner{
   border-color: color-mix(in srgb, var(--accent), var(--border) 45%) !important;
 }
@@ -205,7 +193,6 @@ body{
   background: transparent;
 }
 
-/* Buttons inside results (e.g. "Legg til i middagplan") */
 #middag button{
   margin-top: 10px;
   padding: 10px 12px;
@@ -225,7 +212,6 @@ body{
   border-color: color-mix(in srgb, var(--accent), var(--border) 55%);
 }
 
-/* Accent bar to make it easy to spot */
 #dinner-plan::before{
   content:"";
   position: absolute;
@@ -237,7 +223,6 @@ body{
   border-radius: var(--radius) var(--radius) 0 0;
 }
 
-/* If empty, still show a visible label */
 #dinner-plan:empty{
   padding: 18px;
 }
@@ -275,7 +260,6 @@ body{
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-
   padding: 12px 14px;
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -287,7 +271,6 @@ body{
   font-weight: 700;
 }
 
-/* Remove button */
 #dinner-plan button{
   padding: 10px 12px;
   border-radius: 12px;
@@ -317,12 +300,18 @@ body{
     display: grid;
     grid-template-columns: 1fr 360px;
     gap: 18px;
+
+    align-content: start; /* ✅ IMPORTANT: stop grid rows stretching vertically */
   }
 
   #header,
   #facets,
   #search-buttons{
     grid-column: 1 / -1;
+  }
+
+  #search-buttons{
+    align-self: start; /* extra safety */
   }
 
   #middag{
@@ -336,14 +325,13 @@ body{
     top: 18px;
   }
 
-  /* Keep the cards full-width inside the grid */
   #facets, #middag, #dinner-plan{
     max-width: none;
     margin: 0;
   }
 }
 
-/* ---------- Mobile: bigger text + stacked layout ---------- */
+/* ---------- Mobile ---------- */
 @media (max-width: 520px){
   body{ padding: 26px 14px; }
 
