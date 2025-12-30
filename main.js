@@ -49,3 +49,43 @@ randomDinnerBtn.addEventListener('click', () => {
     renderDinnerResult({ dinnerResultContainer, dinners })
   }
 })
+
+import { renderDinnerResult } from "./ui/renderDinnerResult.js";
+import { renderDinnerPlan } from "./ui/renderDinnerPlan.js";
+
+const dinnerResultContainer = document.getElementById("middag");
+const dinnerPlanContainer = document.getElementById("dinner-plan");
+
+let dinnerPlan = [];
+
+function addToPlan(dinner) {
+  // prevent duplicates by name (optional)
+  if (dinnerPlan.some(d => d.name === dinner.name)) return;
+
+  dinnerPlan = [...dinnerPlan, dinner];
+  renderPlan();
+}
+
+function removeFromPlan(index) {
+  dinnerPlan = dinnerPlan.filter((_, i) => i !== index);
+  renderPlan();
+}
+
+function renderPlan() {
+  renderDinnerPlan({
+    dinnerPlanContainer,
+    dinners: dinnerPlan,
+    onRemove: removeFromPlan
+  });
+}
+
+// initial render
+renderPlan();
+
+// When you render results:
+renderDinnerResult({
+  dinnerResultContainer,
+  dinners, // whatever you found
+  onAddToPlan: addToPlan
+});
+
