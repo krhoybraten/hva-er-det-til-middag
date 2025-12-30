@@ -7,7 +7,8 @@ const middag = document.getElementById("middag");
 const generate = document.getElementById("generate");
 const tagContainer = document.getElementById("facets");
 const tags = await getTags();
-let selectedTags = []
+let selectedTags = [];
+let dinnerResult = [];
 
 renderTagCheckboxes({
   tagContainer,
@@ -26,5 +27,10 @@ function replaceText(element, newText) {
 
 generate.addEventListener('click', () => {
   const randomDinner = getRandomDinner(selectedTags);
-  replaceText(middag, !randomDinner ? 'Fant ingen middager' : randomDinner.name);
+  if(!randomDinner) {
+    replaceText(middag, 'Fant ingen middager')
+  } else {
+    dinnerResult = [randomDinner.name]
+    renderDinnerResult(dinnerResult);
+  }
 });
