@@ -24,11 +24,13 @@ export const dinnerData = [
   { name: 'Pølser', emoji: '🌭', tags: ['rask', 'svinekjøtt'] },
   { name: 'Tomatsuppe med tilbehør', emoji: '🍅', tags: ['svinekjøtt', 'pasta', 'vegetar'] },
   { name: 'Kjøttboller med potetmos', emoji: '🍽️', tags: ['svinekjøtt', 'rask'] },
-  { name: 'Pølse- og makaronigrateng', emoji: '🧀', tags: ['svinekjøtt', 'pasta', 'rask'] },
+  { name: 'Pølse- og makaronigrateng', emoji: '🥘', tags: ['svinekjøtt', 'pasta', 'rask'] },
   { name: 'Kjøttkaker', emoji: '🍽️', tags: ['oksekjøtt', 'svinekjøtt', 'helg'] },
   { name: 'Butter Chicken', emoji: '🍛', tags: ['indisk', 'kylling', 'rask'] },
   { name: 'Korma', emoji: '🍛', tags: ['indisk', 'kylling', 'oksekjøtt', 'lammekjøtt', 'svinekjøtt'] },
   { name: 'Lammelår', emoji: '🍖', tags: ['lammekjøtt', 'helg', 'grill'] },
   { name: 'Frossenpizza', emoji: '🍕', tags: ['svinekjøtt', 'oksekjøtt', 'rask'] },
-  { name: 'Pasta med pesto', emoji: '🌿', tags: ['svinekjøtt', 'oksekjøtt', 'fisk', 'pasta', 'rask', 'vegetar'] }
+  { name: 'Pasta med pesto', emoji: '🌿', tags: ['svinekjøtt', 'oksekjøtt', 'fisk', 'pasta', 'rask', 'vegetar'] },
+  { name: 'Chicken nuggets', emoji: '🍗', tags: ['kylling', 'rask']},
+  { name: 'Finnbiff', emoji: '🦌', tags: ['vilt']
 ];
