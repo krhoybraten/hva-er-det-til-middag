@@ -10,7 +10,8 @@ const search = document.getElementById('search')
 const randomDinnerBtn = document.getElementById('random-dinner')
 const tagContainer = document.getElementById('facets')
 const dinnerResultContainer = document.getElementById('middag')
-
+const dinnerPlanContainer = document.getElementById('dinner-plan')
+const dinnerPlan = []
 const tags = await getTags()
 let selectedTags = []
 let dinners = []
