@@ -1,9 +1,13 @@
 import { dinnerData } from './data/dinnerData.js'
+
 import { getTags } from './api/tags.js'
 import { getRandomDinner } from './api/randomDinner.js'
+import { getDinnersByTags } from './api/getDinnersByTags.js'
+
 import { renderTagCheckboxes } from './ui/renderTags.js'
 import { renderDinnerResult } from './ui/renderDinnerResult.js'
-import { getDinnersByTags } from './api/getDinnersByTags.js'
+import { renderDinnerPlan } from "./ui/renderDinnerPlan.js";
+
 
 const middag = document.getElementById('middag')
 const search = document.getElementById('search')
@@ -50,9 +54,6 @@ randomDinnerBtn.addEventListener('click', () => {
     renderDinnerResult({ dinnerResultContainer, dinners })
   }
 })
-
-import { renderDinnerResult } from "./ui/renderDinnerResult.js";
-import { renderDinnerPlan } from "./ui/renderDinnerPlan.js";
 
 const dinnerResultContainer = document.getElementById("middag");
 const dinnerPlanContainer = document.getElementById("dinner-plan");
