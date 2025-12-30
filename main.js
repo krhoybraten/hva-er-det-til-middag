@@ -10,15 +10,14 @@ import { renderDinnerPlan } from "./ui/renderDinnerPlan.js";
 
 
 const middag = document.getElementById('middag')
-const search = document.getElementById('search')
-const randomDinnerBtn = document.getElementById('random-dinner')
 const tagContainer = document.getElementById('facets')
 const dinnerResultContainer = document.getElementById('middag')
 const dinnerPlanContainer = document.getElementById('dinner-plan')
-const dinnerPlan = []
+
+const search = document.getElementById('search')
+const randomDinnerBtn = document.getElementById('random-dinner')
+
 const tags = await getTags()
-const dinnerResultContainer = document.getElementById("middag");
-const dinnerPlanContainer = document.getElementById("dinner-plan");
 
 let selectedTags = []
 let dinners = []
