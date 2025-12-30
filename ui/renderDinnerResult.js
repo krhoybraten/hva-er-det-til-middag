@@ -12,7 +12,8 @@ export function renderDinnerResult({
 
   for (const dinner of dinners) {
     const li = document.createElement("li");
-    li.textContent = dinner.name ?? dinner; // supports objects or strings
+    li.textContent = `${dinner.emoji ?? '🍽️'} ${dinner.name}`;
+
     ul.appendChild(li);
   }
 
