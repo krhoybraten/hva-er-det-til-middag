@@ -1,14 +1,16 @@
 import {dinnerData} from './data/dinnerData.js'
-import {getTags} from "./api/tags.js";
-import {getRandomDinner} from "./api/randomDinner.js";
-import {renderTagCheckboxes} from "./ui/renderTags.js";
+import {getTags} from './api/tags.js';
+import {getRandomDinner} from './api/randomDinner.js';
+import {renderTagCheckboxes} from './ui/renderTags.js';
+import {renderDinnerResults} from './ui/renderdinnerResults.js';
 
-const middag = document.getElementById("middag");
-const generate = document.getElementById("generate");
-const tagContainer = document.getElementById("facets");
+const middag = document.getElementById('middag');
+const generate = document.getElementById('generate');
+const tagContainer = document.getElementById('facets');
+const dinnerResultContainer = document.getElementById('middag');
 const tags = await getTags();
 let selectedTags = [];
-let dinnerResult = [];
+let dinners = [];
 
 renderTagCheckboxes({
   tagContainer,
@@ -30,7 +32,7 @@ generate.addEventListener('click', () => {
   if(!randomDinner) {
     replaceText(middag, 'Fant ingen middager')
   } else {
-    dinnerResult = [randomDinner.name]
-    renderDinnerResult(dinnerResult);
+    dinners = [randomDinner.name]
+    renderDinnerResult({dinnerResultContainer, dinners});
   }
 });
