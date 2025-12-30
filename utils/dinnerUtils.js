@@ -16,9 +16,10 @@ export function findRandomDinnerWithTags(dinners, requiredTags = []) {
 }
 
 export function findDinnersByTags(dinners, requiredTags = []) {
-  const matches = dinners.filter(dinner =>
-    requiredTags.every(tag => dinner.tags.includes(tag))
-  );
-
-  return matches;
+  return dinners
+    .filter(dinner =>
+      requiredTags.every(tag => dinner.tags.includes(tag))
+    )
+    .sort((a, b) => a.name.localeCompare(b.name, 'nb'));
 }
+
