@@ -13,7 +13,7 @@ export const dinnerData = [
   { name: 'Kyllingvinger', emoji: '🍗', tags: ['kylling', 'helg', 'rask'] },
   { name: 'Lasagne', emoji: '🍝', tags: ['oksekjøtt', 'helg', 'pasta'] },
   { name: 'Vårruller', emoji: '🥟', tags: ['oksekjøtt', 'svinekjøtt', 'vegetar', 'kylling'] },
-  { name: 'Ferske vårruller', emoji: '🥬', tags: ['oksekjøtt', 'svinekjøtt', 'vegetar', 'kylling'] },
+  { name: 'Ferske vårruller', emoji: '🥬', tags: ['oksekjøtt', 'svinekjøtt', 'vegetar', 'kylling'], recipeUrls: [{url: 'https://www.matprat.no/oppskrifter/familien/ferske-varruller-med-kylling/', name: 'Matprat.no: Ferske vårruller med kylling'}] },
   { name: 'Fiskekakewraps', emoji: '🌯', tags: ['fisk', 'rask'] },
   { name: 'Nachos', emoji: '🧀', tags: ['oksekjøtt', 'helg', 'rask'] },
   { name: 'Steik', emoji: '🥩', tags: ['oksekjøtt', 'svinekjøtt', 'lammekjøtt', 'vilt', 'helg', 'grill'] },
