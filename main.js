@@ -35,9 +35,10 @@ search.addEventListener('click', () => {
   if (!dinners.length) {
     replaceText(middag, 'Fant ingen middager')
   } else {
-    renderDinnerResult({ dinnerResultContainer, dinners })
+    renderDinnerResult({ dinnerResultContainer, dinners, onAddToPlan: addToPlan })
   }
 })
+
 
 randomDinnerBtn.addEventListener('click', () => {
   const one = getRandomDinner(selectedTags)
@@ -81,11 +82,3 @@ function renderPlan() {
 
 // initial render
 renderPlan();
-
-// When you render results:
-renderDinnerResult({
-  dinnerResultContainer,
-  dinners, // whatever you found
-  onAddToPlan: addToPlan
-});
-
