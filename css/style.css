@@ -53,7 +53,7 @@ body{
 }
 
 /* Shared panel look */
-#facets, #middag ul li{
+#facets, #middag > ul > li{
   max-width: 860px;
   margin: 0 auto 18px;
   background: var(--panel);
