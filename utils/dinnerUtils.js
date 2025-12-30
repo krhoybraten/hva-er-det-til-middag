@@ -14,3 +14,11 @@ export function findRandomDinnerWithTags(dinners, requiredTags = []) {
   const index = Math.floor(Math.random() * matches.length);
   return matches[index];
 }
+
+export function findDinnersByTags(dinners, requieredTags = [] {
+  const matches = dinners.filter(dinner =>
+    requiredTags.every(tag => dinner.tags.includes(tag))
+  );
+
+  return matches;
+}
