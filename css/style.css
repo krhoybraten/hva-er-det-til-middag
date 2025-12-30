@@ -113,7 +113,7 @@ body{
 }
 
 /* ===== Button ===== */
-#generate{
+button {
   max-width: 860px;
   width: 100%;
   display: block;
@@ -134,18 +134,18 @@ body{
   transition: transform .12s ease, filter .12s ease;
 }
 
-#generate:hover{
+button:hover{
   transform: translateY(-1px);
   filter: brightness(1.02);
 }
 
-#generate:active{
+button:active{
   transform: translateY(0);
   filter: brightness(.98);
 }
 
 /* ===== Result ===== */
-#middag{
+#middag ul li {
   padding: 22px 18px;
   text-align: center;
   font-size: clamp(1.15rem, 2vw, 1.6rem);
@@ -155,7 +155,7 @@ body{
 }
 
 /* subtle “card accent” */
-#middag::before{
+#middag ul li::before{
   content:"";
   position:absolute;
   inset: 0 0 auto 0;
@@ -165,10 +165,7 @@ body{
   opacity: .9;
 }
 
-/* Animation on updates:
-   Adds a little polish without JS changes, using :active
-   (Optional: see JS snippet below for a better trigger) */
-#generate:active ~ #middag{
+button:active ~ #middag{
   animation: pop .22s ease-out;
 }
 
