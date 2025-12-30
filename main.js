@@ -17,8 +17,12 @@ const dinnerResultContainer = document.getElementById('middag')
 const dinnerPlanContainer = document.getElementById('dinner-plan')
 const dinnerPlan = []
 const tags = await getTags()
+const dinnerResultContainer = document.getElementById("middag");
+const dinnerPlanContainer = document.getElementById("dinner-plan");
+
 let selectedTags = []
 let dinners = []
+let dinnerPlan = [];
 
 renderTagCheckboxes({
   tagContainer,
@@ -54,11 +58,6 @@ randomDinnerBtn.addEventListener('click', () => {
     renderDinnerResult({ dinnerResultContainer, dinners })
   }
 })
-
-const dinnerResultContainer = document.getElementById("middag");
-const dinnerPlanContainer = document.getElementById("dinner-plan");
-
-let dinnerPlan = [];
 
 function addToPlan(dinner) {
   // prevent duplicates by name (optional)
