@@ -149,7 +149,7 @@ button:active{
   padding: 0px;
 }
 
-#middag ul > li {
+#middag > ul > li {
   padding: 22px 18px;
   text-align: center;
   font-size: clamp(1.15rem, 2vw, 1.6rem);
@@ -160,7 +160,7 @@ button:active{
 }
 
 /* subtle “card accent” */
-#middag ul > li::before{
+#middag > ul > li::before{
   content:"";
   position:absolute;
   inset: 0 0 auto 0;
