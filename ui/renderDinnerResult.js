@@ -12,8 +12,8 @@ export function renderDinnerResult({
   for (const dinner of dinners) {
     const li = document.createElement("li");
 
-    // Dinner title
-    const title = document.createElement("div");
+    // Dinner title (semantic)
+    const title = document.createElement("h2");
     title.textContent = `${dinner.emoji ?? '🍽️'} ${dinner.name}`;
     li.appendChild(title);
 
