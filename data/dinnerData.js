@@ -16,7 +16,7 @@ export const dinnerData = [
   { name: 'Ferske vårruller', emoji: '🥬', tags: ['oksekjøtt', 'svinekjøtt', 'vegetar', 'kylling'], recipeUrls: [{url: 'https://www.matprat.no/oppskrifter/familien/ferske-varruller-med-kylling/', name: 'Matprat.no: Ferske vårruller med kylling'}] },
   { name: 'Fiskekakewraps', emoji: '🌯', tags: ['fisk', 'rask'] },
   { name: 'Nachos', emoji: '🧀', tags: ['oksekjøtt', 'helg', 'rask'] },
-  { name: 'Steik', emoji: '🥩', tags: ['oksekjøtt', 'svinekjøtt', 'lammekjøtt', 'vilt', 'helg', 'grill'] },
+  { name: 'Steik', emoji: '🥩', tags: ['oksekjøtt', 'svinekjøtt', 'lammekjøtt', 'vilt', 'helg', 'grill'], recipeUrls: [{name: 'Godt.no: Røkt svinekam med rotgrønnsaker', url: 'https://www.godt.no/oppskrifter/kjoett/svin/13820/roekt-svinekam'}] },
   { name: 'Fiskegrateng', emoji: '🐟', tags: ['fisk', 'pasta'] },
   { name: 'Koteletter', emoji: '🍖', tags: ['svinekjøtt', 'lammekjøtt', 'helg', 'grill'] },
   { name: 'Wok', emoji: '🥢', tags: ['svinekjøtt', 'oksekjøtt', 'kylling'] },
@@ -32,5 +32,10 @@ export const dinnerData = [
   { name: 'Frossenpizza', emoji: '🍕', tags: ['svinekjøtt', 'oksekjøtt', 'rask'] },
   { name: 'Pasta med pesto', emoji: '🌿', tags: ['svinekjøtt', 'oksekjøtt', 'fisk', 'pasta', 'rask', 'vegetar'] },
   { name: 'Chicken nuggets', emoji: '🍗', tags: ['kylling', 'rask']},
-  { name: 'Finnbiff', emoji: '🦌', tags: ['vilt']}
+  { name: 'Finnbiff', emoji: '🦌', tags: ['vilt']},
+  { name: 'Sosekjøtt', emoji: '🍲', tags: ['oksekjøtt', 'helg'], recipeUrls: [{name: 'Matprat: Sosekjøtt', url: 'https://www.matprat.no/oppskrifter/tradisjon/sosekjott/'}] },
+  { name: 'Flesk og duppe', emoji: '🥓', tags: ['svinekjøtt'], recipeUrls: [{name: 'Matprat: Flesk og duppe', url: 'https://www.matprat.no/oppskrifter/tradisjon/flesk-og-duppe/'}]},
+  { name: 'Crispy duck', emoji: '🦆', tags: ['and', 'helg'], recipeUrls: [{name: 'Matprat: enkel Crispy duck', url: 'https://www.matprat.no/oppskrifter/gjester/enkel-crispy-duck/'}]},
+  { name: 'Lammegryte', emoji: '🐑', tags: ['lammekjøtt'], recipeUrls: [{name: 'Rema 1000: Lammegryte med potetmos og rotgrønnsaker', url: 'https://www.rema.no/oppskrifter/lam-og-farekjott/lammegryte-med-potetmos-og-rotgronnsaker/'}]},
+  { name: 'Shepherd\'s pie', emoji: '🐑', tags: ['lammekjøtt', 'helg']} 
 ];
