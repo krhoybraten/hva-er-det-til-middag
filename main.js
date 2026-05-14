@@ -39,6 +39,10 @@ const isStandalone =
 const isIos = /iphone|ipad|ipod/i.test(window.navigator.userAgent)
 const isAndroid = /android/i.test(window.navigator.userAgent)
 
+if (isStandalone) {
+  installAppBtn.hidden = true
+}
+
 function showInstallButton() {
   if (!isStandalone) {
     installAppBtn.hidden = false
