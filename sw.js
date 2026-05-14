@@ -1,23 +1,24 @@
-const CACHE_NAME = 'middag-app-v5';
+const CACHE_NAME = 'middag-app-v6';
+const BASE_PATH = '/hva-er-det-til-middag/';
 
 const ASSETS = [
-  './',
-  './index.html',
-  './main.js',
-  './css/style.css',
-  './manifest.webmanifest',
-  './data/dinnerData.js',
-  './api/getDinnersByTags.js',
-  './api/randomDinner.js',
-  './api/tags.js',
-  './ui/renderDinnerPlan.js',
-  './ui/renderDinnerResult.js',
-  './ui/renderTags.js',
-  './utils/dinnerUtils.js',
-  './icons/icon.svg',
-  './icons/icon-180.png',
-  './icons/icon-192.png',
-  './icons/icon-512.png'
+  BASE_PATH,
+  `${BASE_PATH}index.html`,
+  `${BASE_PATH}main.js`,
+  `${BASE_PATH}css/style.css`,
+  `${BASE_PATH}manifest.webmanifest`,
+  `${BASE_PATH}data/dinnerData.js`,
+  `${BASE_PATH}api/getDinnersByTags.js`,
+  `${BASE_PATH}api/randomDinner.js`,
+  `${BASE_PATH}api/tags.js`,
+  `${BASE_PATH}ui/renderDinnerPlan.js`,
+  `${BASE_PATH}ui/renderDinnerResult.js`,
+  `${BASE_PATH}ui/renderTags.js`,
+  `${BASE_PATH}utils/dinnerUtils.js`,
+  `${BASE_PATH}icons/icon.svg`,
+  `${BASE_PATH}icons/icon-180.png`,
+  `${BASE_PATH}icons/icon-192.png`,
+  `${BASE_PATH}icons/icon-512.png`
 ];
 
 self.addEventListener('install', event => {
@@ -30,43 +31,48 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(cacheNames =>
-      Promise.all(
-        cacheNames
-          .filter(cacheName => cacheName !== CACHE_NAME)
-          .map(cacheName => caches.delete(cacheName))
-      )
-    )
+    Promise.all([
+      caches.keys().then(cacheNames =>
+        Promise.all(
+          cacheNames
+            .filter(cacheName => cacheName !== CACHE_NAME)
+            .map(cacheName => caches.delete(cacheName))
+        )
+      ),
+      self.clients.claim()
+    ])
   );
-
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+
+  const requestUrl = new URL(event.request.url);
+
+  if (requestUrl.origin !== self.location.origin) return;
+  if (!requestUrl.pathname.startsWith(BASE_PATH)) return;
 
   event.respondWith(
     fetch(event.request)
       .then(response => {
         if (response.ok) {
           const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseToCache);
-          });
+          event.waitUntil(
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseToCache))
+          );
         }
 
         return response;
       })
-      .catch(() =>
-        caches.match(event.request).then(cachedResponse => {
-          if (cachedResponse) return cachedResponse;
+      .catch(async () => {
+        const cachedResponse = await caches.match(event.request);
+        if (cachedResponse) return cachedResponse;
 
         if (event.request.mode === 'navigate') {
-          return caches.match('./index.html');
+          return caches.match(`${BASE_PATH}index.html`);
         }
 
-        throw new Error(`Unable to fetch ${event.request.url}`);
-        })
-      )
+        return Response.error();
+      })
   );
 });
