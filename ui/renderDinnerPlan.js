@@ -7,7 +7,7 @@ export function renderDinnerPlan({
   dinnerPlanContainer.innerHTML = "";
 
   const title = document.createElement("h2");
-  title.textContent = "Middagplan";
+  title.textContent = "Middagsplan";
   dinnerPlanContainer.appendChild(title);
 
   if (!dinners.length) {
