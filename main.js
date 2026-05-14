@@ -25,6 +25,7 @@ const dinnerPlanContainer = document.getElementById('dinner-plan')
 
 const search = document.getElementById('search')
 const randomDinnerBtn = document.getElementById('random-dinner')
+const installBanner = document.getElementById('install-banner')
 const installAppBtn = document.getElementById('install-app')
 
 const tags = await getTags()
@@ -40,12 +41,12 @@ const isIos = /iphone|ipad|ipod/i.test(window.navigator.userAgent)
 const isAndroid = /android/i.test(window.navigator.userAgent)
 
 if (isStandalone) {
-  installAppBtn.hidden = true
+  installBanner.hidden = true
 }
 
 function showInstallButton() {
   if (!isStandalone) {
-    installAppBtn.hidden = false
+    installBanner.hidden = false
   }
 }
 
