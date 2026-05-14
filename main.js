@@ -37,16 +37,13 @@ let dinnerPlan = [];
 const isStandalone =
   window.matchMedia('(display-mode: standalone)').matches ||
   window.navigator.standalone === true
-const isIos = /iphone|ipad|ipod/i.test(window.navigator.userAgent)
-const isAndroid = /android/i.test(window.navigator.userAgent)
 
-if (isStandalone) {
-  installBanner.hidden = true
-}
+installBanner.hidden = true
 
 function showInstallButton() {
-  if (!isStandalone) {
+  if (!isStandalone && deferredInstallPrompt) {
     installBanner.hidden = false
+    installAppBtn.hidden = false
   }
 }
 
@@ -56,30 +53,18 @@ window.addEventListener('beforeinstallprompt', event => {
   showInstallButton()
 })
 
-if (!isStandalone) {
-  showInstallButton()
-}
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null
+  installBanner.hidden = true
+})
 
 installAppBtn.addEventListener('click', async () => {
-  if (deferredInstallPrompt) {
-    deferredInstallPrompt.prompt()
-    await deferredInstallPrompt.userChoice
-    deferredInstallPrompt = null
-    installAppBtn.hidden = true
-    return
-  }
+  if (!deferredInstallPrompt) return
 
-  if (isIos) {
-    window.alert('På iPhone/iPad: Trykk Del-knappen i Safari, og velg "Legg til på Hjem-skjerm".')
-    return
-  }
-
-  if (isAndroid) {
-    window.alert('På Android: Åpne menyen i nettleseren, og velg "Installer app" eller "Legg til på startsiden".')
-    return
-  }
-
-  window.alert('Åpne nettlesermenyen og velg "Installer app" eller "Legg til på startsiden".')
+  deferredInstallPrompt.prompt()
+  await deferredInstallPrompt.userChoice
+  deferredInstallPrompt = null
+  installBanner.hidden = true
 })
 
 renderTagCheckboxes({
