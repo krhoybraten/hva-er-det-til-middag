@@ -1,4 +1,4 @@
-const CACHE_NAME = 'middag-app-v3';
+const CACHE_NAME = 'middag-app-v4';
 
 const ASSETS = [
   './',
