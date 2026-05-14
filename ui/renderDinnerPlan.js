@@ -1,7 +1,7 @@
 export function renderDinnerPlan({
   dinnerPlanContainer,
   dinners,
-  name = "dinner-plan",
+  name = "dinner-plan-items",
   onRemove
 }) {
   dinnerPlanContainer.innerHTML = "";
