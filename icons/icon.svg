@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>Hva er det til middag?</title>
+  <rect width="512" height="512" rx="112" fill="#0f172a"/>
+  <circle cx="256" cy="268" r="152" fill="#f9fafb"/>
+  <circle cx="256" cy="268" r="114" fill="#111827"/>
+  <path d="M138 402c28 30 70 48 118 48s90-18 118-48" fill="none" stroke="#22c55e" stroke-width="30" stroke-linecap="round"/>
+  <path d="M178 170c30-38 77-60 128-54 68 8 110 50 110 105 0 47-29 77-73 96-30 13-42 26-42 52v8h-82v-14c0-55 27-82 70-102 29-14 43-27 43-49 0-24-20-40-52-40-35 0-64 16-87 48l-15-50Z" fill="#8b5cf6"/>
+  <circle cx="260" cy="414" r="28" fill="#8b5cf6"/>
+</svg>

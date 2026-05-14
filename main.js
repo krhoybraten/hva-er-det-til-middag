@@ -8,6 +8,13 @@ import { renderTagCheckboxes } from './ui/renderTags.js'
 import { renderDinnerResult } from './ui/renderDinnerResult.js'
 import { renderDinnerPlan } from "./ui/renderDinnerPlan.js";
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(error => {
+      console.warn('Service worker registration failed', error)
+    })
+  })
+}
 
 const middag = document.getElementById('middag')
 const tagContainer = document.getElementById('facets')
