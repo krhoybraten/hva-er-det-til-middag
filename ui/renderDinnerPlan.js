@@ -1,3 +1,13 @@
+const familyMemberLabels = {
+  sloth: "🦥",
+  giraffe: "🦒",
+  kangaroo: "🦘",
+  lemur: "🦝",
+  "flying-squirrel": "🐿️"
+};
+
+const familyMemberOrder = Object.keys(familyMemberLabels);
+
 function defaultDate() {
   return new Date().toISOString().slice(0, 10);
 }
@@ -8,6 +18,44 @@ function formatDate(date) {
     day: 'numeric',
     month: 'short'
   }).format(new Date(`${date}T12:00:00`));
+}
+
+function renderLikedBy(dinner) {
+  if (!Array.isArray(dinner?.likedBy) || dinner.likedBy.length === 0) return null;
+
+  const likedByList = document.createElement("div");
+  likedByList.className = "liked-by-list dinner-plan-liked-by";
+
+  for (const member of familyMemberOrder) {
+    if (!dinner.likedBy.includes(member)) continue;
+
+    const emoji = document.createElement("span");
+    emoji.className = "liked-by-emoji";
+    emoji.textContent = familyMemberLabels[member];
+    likedByList.appendChild(emoji);
+  }
+
+  return likedByList;
+}
+
+function renderRecipes(dinner) {
+  if (!Array.isArray(dinner?.recipeUrls) || dinner.recipeUrls.length === 0) return null;
+
+  const recipeList = document.createElement("ul");
+  recipeList.className = "dinner-plan-recipes";
+
+  for (const recipe of dinner.recipeUrls) {
+    const recipeItem = document.createElement("li");
+    const link = document.createElement("a");
+    link.textContent = recipe.name;
+    link.href = recipe.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    recipeItem.appendChild(link);
+    recipeList.appendChild(recipeItem);
+  }
+
+  return recipeList;
 }
 
 export function renderDinnerPlan({
@@ -82,25 +130,26 @@ export function renderDinnerPlan({
   planSlots.forEach(slot => {
     const li = document.createElement("li");
 
-    const content = document.createElement("div");
-    content.className = "dinner-plan-slot";
+    const header = document.createElement("div");
+    header.className = "dinner-plan-slot-header";
 
     const date = document.createElement("strong");
     date.textContent = formatDate(slot.date);
 
     const dinner = document.createElement("span");
+    dinner.className = "dinner-plan-meal";
     dinner.textContent = slot.dinner
       ? `${slot.dinner.emoji ?? "🍽️"} ${slot.dinner.name}`
       : "Ledig";
 
-    content.appendChild(date);
-    content.appendChild(dinner);
+    header.appendChild(date);
+    header.appendChild(dinner);
 
     if (slot.dinner && slot.quick) {
       const quickBadge = document.createElement("span");
       quickBadge.className = "quick-day-badge";
       quickBadge.textContent = "Rask dag";
-      content.appendChild(quickBadge);
+      header.appendChild(quickBadge);
     }
 
     if (!slot.dinner) {
@@ -112,7 +161,7 @@ export function renderDinnerPlan({
       quickInput.addEventListener("change", () => onToggleQuick?.(slot.date, quickInput.checked));
       quickLabel.appendChild(quickInput);
       quickLabel.append("Rask dag");
-      content.appendChild(quickLabel);
+      header.appendChild(quickLabel);
     }
 
     const actions = document.createElement("div");
@@ -138,8 +187,22 @@ export function renderDinnerPlan({
     removeBtn.addEventListener("click", () => onRemove?.(slot.date));
     actions.appendChild(removeBtn);
 
-    li.appendChild(content);
+    li.appendChild(header);
     li.appendChild(actions);
+
+    if (slot.dinner) {
+      const details = document.createElement("div");
+      details.className = "dinner-plan-details";
+
+      const likedBy = renderLikedBy(slot.dinner);
+      if (likedBy) details.appendChild(likedBy);
+
+      const recipes = renderRecipes(slot.dinner);
+      if (recipes) details.appendChild(recipes);
+
+      if (details.childElementCount) li.appendChild(details);
+    }
+
     ul.appendChild(li);
   });
 
