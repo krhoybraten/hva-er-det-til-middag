@@ -71,6 +71,35 @@
   text-transform: capitalize;
 }
 
+.quick-day-toggle{
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 6px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--muted);
+  font-size: .9rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.quick-day-toggle input{
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--accent2);
+}
+
+.quick-day-toggle:has(input:checked){
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent2), var(--border) 45%);
+  background: color-mix(in srgb, var(--accent2), var(--chip) 84%);
+}
+
 .dinner-plan-actions{
   display: flex;
   flex-wrap: wrap;
