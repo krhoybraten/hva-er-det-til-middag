@@ -166,10 +166,51 @@ function buildSuggestionAttempts({ needsFish, needsVegetarian, quick, weekend })
   if (needsFish) addAttempt(attempts, ['fisk', ...(quick ? ['rask'] : [])])
   if (needsVegetarian) addAttempt(attempts, ['vegetar', ...(quick ? ['rask'] : [])])
   if (weekend) addAttempt(attempts, ['helg'])
-  if (quick) addAttempt(attempts, ['rask'])
-  addAttempt(attempts, [])
+  if (quick) {
+    addAttempt(attempts, ['rask'])
+  } else {
+    addAttempt(attempts, [])
+  }
 
   return attempts
+}
+
+function getWeekTargets(weekSlots) {
+  return {
+    fishTarget: weekSlots.length >= 7 ? 2 : Math.min(2, Math.ceil(weekSlots.length * 2 / 7)),
+    vegetarianTarget: weekSlots.length >= 7 ? 1 : Math.min(1, Math.ceil(weekSlots.length / 7))
+  }
+}
+
+function buildUsedDinnerNames(planSlots, ignoredDate) {
+  return new Set(planSlots
+    .filter(slot => slot.date !== ignoredDate)
+    .map(slot => slot.dinner?.name)
+    .filter(Boolean))
+}
+
+function findSuggestionForSlot(slot, planSlots, usedDinnerNames) {
+  const slotIndex = planSlots.findIndex(planSlot => planSlot.date === slot.date)
+  const weekStart = Math.floor(slotIndex / 7) * 7
+  const weekSlots = planSlots.slice(weekStart, weekStart + 7)
+  const { fishTarget, vegetarianTarget } = getWeekTargets(weekSlots)
+  const fishCount = weekSlots
+    .filter(weekSlot => weekSlot.date !== slot.date && weekSlot.dinner && hasTag(weekSlot.dinner, 'fisk'))
+    .length
+  const vegetarianCount = weekSlots
+    .filter(weekSlot => weekSlot.date !== slot.date && weekSlot.dinner && hasTag(weekSlot.dinner, 'vegetar'))
+    .length
+
+  const attempts = buildSuggestionAttempts({
+    needsFish: fishCount < fishTarget,
+    needsVegetarian: vegetarianCount < vegetarianTarget,
+    quick: Boolean(slot.quick),
+    weekend: isWeekendDate(slot.date)
+  })
+
+  return attempts
+    .map(requiredTags => findSuggestion(requiredTags, usedDinnerNames))
+    .find(Boolean)
 }
 
 function renderResults() {
@@ -257,14 +298,30 @@ function removeFromPlan(date) {
   renderResults()
 }
 
+function suggestPlanSlot(date) {
+  const targetSlot = dinnerPlan.find(slot => slot.date === date)
+  if (!targetSlot) return
+
+  const usedDinnerNames = buildUsedDinnerNames(dinnerPlan, date)
+  if (targetSlot.dinner?.name) usedDinnerNames.add(targetSlot.dinner.name)
+
+  const suggestion = findSuggestionForSlot(targetSlot, dinnerPlan, usedDinnerNames)
+  if (!suggestion) return
+
+  dinnerPlan = dinnerPlan.map(slot =>
+    slot.date === date ? { ...slot, dinner: suggestion } : slot
+  )
+  renderPlan()
+  renderResults()
+}
+
 function suggestPlan() {
   const nextPlan = dinnerPlan.map(slot => ({ ...slot }))
   const usedDinnerNames = new Set(nextPlan.map(slot => slot.dinner?.name).filter(Boolean))
 
   for (let weekStart = 0; weekStart < nextPlan.length; weekStart += 7) {
     const weekSlots = nextPlan.slice(weekStart, weekStart + 7)
-    const fishTarget = weekSlots.length >= 7 ? 2 : Math.min(2, Math.ceil(weekSlots.length * 2 / 7))
-    const vegetarianTarget = weekSlots.length >= 7 ? 1 : Math.min(1, Math.ceil(weekSlots.length / 7))
+    const { fishTarget, vegetarianTarget } = getWeekTargets(weekSlots)
 
     let fishCount = weekSlots.filter(slot => slot.dinner && hasTag(slot.dinner, 'fisk')).length
     let vegetarianCount = weekSlots.filter(slot => slot.dinner && hasTag(slot.dinner, 'vegetar')).length
@@ -303,6 +360,7 @@ function renderPlan() {
     planSlots: dinnerPlan,
     onCreatePlan: createPlan,
     onSuggest: suggestPlan,
+    onSuggestSlot: suggestPlanSlot,
     onRemove: removeFromPlan,
     onClearSlot: clearPlanSlot,
     onToggleQuick: toggleQuickDay
