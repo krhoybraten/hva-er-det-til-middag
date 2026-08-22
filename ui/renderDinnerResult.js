@@ -16,6 +16,14 @@ function formatDate(date) {
   }).format(new Date(`${date}T12:00:00`));
 }
 
+function isFastDinner(dinner) {
+  return dinner.tags?.includes('rask');
+}
+
+function canAddToSlot(dinner, slot) {
+  return !slot.quick || isFastDinner(dinner);
+}
+
 export function renderDinnerResult({
   dinnerResultContainer,
   dinners,
@@ -67,19 +75,27 @@ export function renderDinnerResult({
     const dateSelect = document.createElement("select");
     dateSelect.required = true;
 
+    const availableSlots = planSlots.filter(slot => canAddToSlot(dinner, slot));
+
     if (!planSlots.length) {
       const option = document.createElement("option");
       option.textContent = "Lag middagsplan først";
       option.value = "";
       dateSelect.appendChild(option);
       dateSelect.disabled = true;
+    } else if (!availableSlots.length) {
+      const option = document.createElement("option");
+      option.textContent = "Kan ikke legges på raske dager";
+      option.value = "";
+      dateSelect.appendChild(option);
+      dateSelect.disabled = true;
     } else {
-      for (const slot of planSlots) {
+      for (const slot of availableSlots) {
         const option = document.createElement("option");
         option.value = slot.date;
         option.textContent = slot.dinner
           ? `${formatDate(slot.date)} - erstatt ${slot.dinner.name}`
-          : `${formatDate(slot.date)} - ledig`;
+          : `${formatDate(slot.date)} - ledig${slot.quick ? ' (rask)' : ''}`;
         dateSelect.appendChild(option);
       }
     }
@@ -87,7 +103,7 @@ export function renderDinnerResult({
     const addBtn = document.createElement("button");
     addBtn.type = "submit";
     addBtn.textContent = "Legg til i plan";
-    addBtn.disabled = !planSlots.length;
+    addBtn.disabled = !availableSlots.length;
 
     addForm.appendChild(dateSelect);
     addForm.appendChild(addBtn);
