@@ -54,7 +54,7 @@ export const dinnerData = [
   { name: 'Kjøttkaker', emoji: '🍽️', tags: ['oksekjøtt', 'svinekjøtt', 'helg'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Butter Chicken', emoji: '🍛', tags: ['indisk', 'kylling', 'rask'], likedBy: likedBy() },
   { name: 'Korma', emoji: '🍛', tags: ['indisk', 'kylling', 'oksekjøtt', 'lammekjøtt', 'svinekjøtt'], likedBy: likedBy() },
-  { name: 'Ramen', emoji: '🍜', tags: [], likedBy: likedBy(SLOTH) },
+  { name: 'Ramen', emoji: '🍜', tags: ['kylling'], likedBy: likedBy(SLOTH), recipeUrls: [{name: 'Godt.no: Ramen nudelsuppe med kylling', url: 'https://www.godt.no/oppskrifter/suppe/7508/ramen-nudelsuppe-med-kylling'}] },
   { name: 'Lammelår', emoji: '🍖', tags: ['lammekjøtt', 'helg', 'grill'], likedBy: likedBy(SLOTH), recipeUrls: [{name: 'Godt.no: Langtidsstekt lammelår', url: 'https://www.godt.no/oppskrifter/kjoett/lam/11180/langtidsstekt-lammelaar'}] },
   { name: 'Frossenpizza', emoji: '🍕', tags: ['svinekjøtt', 'oksekjøtt', 'rask'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Pasta med pesto', emoji: '🌿', tags: ['svinekjøtt', 'oksekjøtt', 'fisk', 'pasta', 'rask', 'vegetar'], likedBy: likedBy(KANGAROO) },
