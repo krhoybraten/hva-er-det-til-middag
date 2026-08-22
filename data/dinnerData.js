@@ -37,7 +37,7 @@ export const dinnerData = [
   { name: 'Ferske vårruller', emoji: '🥬', tags: ['oksekjøtt', 'svinekjøtt', 'vegetar', 'kylling'], likedBy: likedBy(SLOTH), recipeUrls: [{url: 'https://www.matprat.no/oppskrifter/familien/ferske-varruller-med-kylling/', name: 'Matprat.no: Ferske vårruller med kylling'}] },
   { name: 'Fiskekakewraps', emoji: '🌯', tags: ['fisk', 'rask'], likedBy: likedBy(SLOTH, KANGAROO) },
   { name: 'Nachos', emoji: '🧀', tags: ['oksekjøtt', 'helg', 'rask'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
-  { name: 'Steik', emoji: '🥩', tags: ['oksekjøtt', 'svinekjøtt', 'lammekjøtt', 'vilt', 'helg', 'grill'], likedBy: likedBy(SLOTH), recipeUrls: [{name: 'Godt.no: Røkt svinekam med rotgrønnsaker', url: 'https://www.godt.no/oppskrifter/kjoett/svin/13820/roekt-svinekam'}, {name: 'Godt.no: Ytrefilet av svin', url: 'https://www.godt.no/oppskrifter/kjoett/13622/ytrefilet-av-svin'}] },
+  { name: 'Steik', emoji: '🥩', tags: ['oksekjøtt', 'svinekjøtt', 'lammekjøtt', 'vilt', 'helg', 'grill'], likedBy: likedBy(SLOTH), recipeUrls: [{name: 'Godt.no: Røkt svinekam med rotgrønnsaker', url: 'https://www.godt.no/oppskrifter/kjoett/svin/13820/roekt-svinekam'}, {name: 'Godt.no: Ytrefilet av svin', url: 'https://www.godt.no/oppskrifter/kjoett/13622/ytrefilet-av-svin'}, {name: 'Godt.no: Oksestek', url: 'https://www.godt.no/oppskrifter/kjoett/storfe/9335/oksestek'}] },
   { name: 'Fiskegrateng', emoji: '🐟', tags: ['fisk', 'pasta'], likedBy: likedBy() },
   { name: 'Koteletter', emoji: '🍖', tags: ['svinekjøtt', 'lammekjøtt', 'helg', 'grill'], likedBy: likedBy(SLOTH) },
   { name: 'Wok', emoji: '🥢', tags: ['svinekjøtt', 'oksekjøtt', 'kylling'], likedBy: likedBy() },
