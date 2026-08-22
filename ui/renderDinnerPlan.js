@@ -17,6 +17,7 @@ export function renderDinnerPlan({
   defaultNumberOfDays = 7,
   onCreatePlan,
   onSuggest,
+  onSuggestSlot,
   onRemove,
   onClearSlot,
   onToggleQuick
@@ -116,6 +117,12 @@ export function renderDinnerPlan({
 
     const actions = document.createElement("div");
     actions.className = "dinner-plan-actions";
+
+    const suggestSlotBtn = document.createElement("button");
+    suggestSlotBtn.type = "button";
+    suggestSlotBtn.textContent = slot.dinner ? "Bytt forslag" : "Foreslå";
+    suggestSlotBtn.addEventListener("click", () => onSuggestSlot?.(slot.date));
+    actions.appendChild(suggestSlotBtn);
 
     if (slot.dinner) {
       const clearBtn = document.createElement("button");
