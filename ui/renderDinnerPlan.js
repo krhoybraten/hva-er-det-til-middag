@@ -92,18 +92,27 @@ export function renderDinnerPlan({
       ? `${slot.dinner.emoji ?? "🍽️"} ${slot.dinner.name}`
       : "Ledig";
 
-    const quickLabel = document.createElement("label");
-    quickLabel.className = "quick-day-toggle";
-    const quickInput = document.createElement("input");
-    quickInput.type = "checkbox";
-    quickInput.checked = Boolean(slot.quick);
-    quickInput.addEventListener("change", () => onToggleQuick?.(slot.date, quickInput.checked));
-    quickLabel.appendChild(quickInput);
-    quickLabel.append("Rask dag");
-
     content.appendChild(date);
     content.appendChild(dinner);
-    content.appendChild(quickLabel);
+
+    if (slot.dinner && slot.quick) {
+      const quickBadge = document.createElement("span");
+      quickBadge.className = "quick-day-badge";
+      quickBadge.textContent = "Rask dag";
+      content.appendChild(quickBadge);
+    }
+
+    if (!slot.dinner) {
+      const quickLabel = document.createElement("label");
+      quickLabel.className = "quick-day-toggle";
+      const quickInput = document.createElement("input");
+      quickInput.type = "checkbox";
+      quickInput.checked = Boolean(slot.quick);
+      quickInput.addEventListener("change", () => onToggleQuick?.(slot.date, quickInput.checked));
+      quickLabel.appendChild(quickInput);
+      quickLabel.append("Rask dag");
+      content.appendChild(quickLabel);
+    }
 
     const actions = document.createElement("div");
     actions.className = "dinner-plan-actions";
