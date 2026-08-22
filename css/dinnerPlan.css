@@ -1,0 +1,100 @@
+.dinner-plan-form,
+.add-to-plan-form{
+  display: grid;
+  gap: 10px;
+}
+
+.dinner-plan-form{
+  grid-template-columns: 1fr 110px auto;
+  align-items: end;
+  margin-bottom: 14px;
+}
+
+.dinner-plan-form label{
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: .9rem;
+  font-weight: 750;
+}
+
+.dinner-plan-form input,
+.add-to-plan-form select{
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--chip);
+  color: var(--text);
+  font: inherit;
+}
+
+#dinner-plan .dinner-plan-form button,
+#dinner-plan .suggest-plan,
+.add-to-plan-form button{
+  min-height: 42px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent2), var(--border) 45%);
+  background: var(--accent2);
+  color: #052e16;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+#dinner-plan .suggest-plan{
+  width: 100%;
+  margin: 0 0 14px;
+}
+
+.add-to-plan-form{
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.add-to-plan-form button:disabled,
+.add-to-plan-form select:disabled{
+  cursor: not-allowed;
+  opacity: .65;
+}
+
+.dinner-plan-slot{
+  display: grid;
+  gap: 4px;
+}
+
+.dinner-plan-slot strong{
+  font-size: .9rem;
+  color: var(--muted);
+  text-transform: capitalize;
+}
+
+.dinner-plan-actions{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+#dinner-plan .dinner-plan-actions button{
+  min-height: 38px;
+  padding: 8px 10px;
+}
+
+@media (max-width: 640px){
+  .dinner-plan-form,
+  .add-to-plan-form{
+    grid-template-columns: 1fr;
+  }
+
+  .dinner-plan-actions{
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .dinner-plan-actions button{
+    flex: 1;
+  }
+}
