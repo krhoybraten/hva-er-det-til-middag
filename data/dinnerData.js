@@ -20,6 +20,7 @@ export const dinnerData = [
   { name: 'Pizza', emoji: '🍕', tags: ['helg', 'oksekjøtt', 'svinekjøtt', 'kylling', 'grill'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Calzone', emoji: '🍕', tags: ['helg', 'svinekjøtt', 'oksekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Calzone', url: 'https://www.godt.no/oppskrifter/pizza/15046/calzone'}] },
   { name: 'Taco', emoji: '🌮', tags: ['helg', 'oksekjøtt', 'lammekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
+  { name: 'Cevapcici', emoji: '🍽️', tags: ['oksekjøtt', 'lammekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Fiskepinner', emoji: '🐟', tags: ['fisk'], likedBy: likedBy(SLOTH, FLYING_SQUIRREL) },
   { name: 'Fiskeburger', emoji: '🍔', tags: ['fisk', 'rask', 'grill'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Lakseburger med parmesankrem og søtpotetfries', url: 'https://www.godt.no/oppskrifter/burger/9224/lakseburger-med-parmesankrem-og-soetpotetfries'}] },
   { name: 'Pølselapskaus', emoji: '🍲', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO) },
