@@ -23,6 +23,7 @@ export const dinnerData = [
   { name: 'Cevapcici', emoji: '🍽️', tags: ['oksekjøtt', 'lammekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Fiskepinner', emoji: '🐟', tags: ['fisk'], likedBy: likedBy(SLOTH, FLYING_SQUIRREL) },
   { name: 'Fiskeburger', emoji: '🍔', tags: ['fisk', 'rask', 'grill'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Lakseburger med parmesankrem og søtpotetfries', url: 'https://www.godt.no/oppskrifter/burger/9224/lakseburger-med-parmesankrem-og-soetpotetfries'}] },
+  { name: 'Stekt laks', emoji: '🐟', tags: ['fisk'], likedBy: likedBy(KANGAROO) },
   { name: 'Pølselapskaus', emoji: '🍲', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO) },
   { name: 'Fiskeboller', emoji: '🐟', tags: ['fisk', 'rask'], likedBy: likedByFishBalls(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Spaghetti med kjøttsaus', emoji: '🍝', tags: ['oksekjøtt', 'rask', 'pasta'], likedBy: likedBy(KANGAROO) },
