@@ -1,4 +1,4 @@
-import { dinnerData } from './data/dinnerData.js'
+import { familyMembers } from './data/dinnerData.js'
 
 import { getTags } from './api/tags.js'
 import { getRandomDinner } from './api/randomDinner.js'
@@ -20,6 +20,7 @@ if ('serviceWorker' in navigator) {
 
 const middag = document.getElementById('middag')
 const tagContainer = document.getElementById('facets')
+const familyMemberContainer = document.getElementById('family-members')
 const dinnerResultContainer = document.getElementById('middag')
 const dinnerPlanContainer = document.getElementById('dinner-plan')
 
@@ -31,6 +32,7 @@ const installAppBtn = document.getElementById('install-app')
 const tags = await getTags()
 
 let selectedTags = []
+let selectedFamilyMembers = []
 let dinners = []
 let dinnerPlan = [];
 
@@ -76,12 +78,22 @@ renderTagCheckboxes({
   }
 })
 
+renderTagCheckboxes({
+  tagContainer: familyMemberContainer,
+  tags: familyMembers,
+  name: 'family-members',
+  onChange: () => {
+    selectedFamilyMembers = [...familyMemberContainer.querySelectorAll("input:checked")]
+      .map(cb => cb.value)
+  }
+})
+
 function replaceText(element, newText) {
   element.textContent = newText
 }
 
 search.addEventListener('click', () => {
-  dinners = getDinnersByTags(selectedTags)
+  dinners = getDinnersByTags(selectedTags, selectedFamilyMembers)
 
   if (!dinners.length) {
     replaceText(middag, 'Fant ingen middager')
@@ -92,7 +104,7 @@ search.addEventListener('click', () => {
 
 
 randomDinnerBtn.addEventListener('click', () => {
-  const one = getRandomDinner(selectedTags)
+  const one = getRandomDinner(selectedTags, selectedFamilyMembers)
 
   if (!one) {
     replaceText(middag, 'Fant ingen middager')
