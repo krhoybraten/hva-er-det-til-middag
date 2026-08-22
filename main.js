@@ -120,12 +120,11 @@ function sortDinnerCandidates(a, b) {
 }
 
 function findSuggestion(requiredTags, usedDinnerNames) {
-  const candidates = dinnerData
+  return dinnerData
     .filter(dinner => matchesSelectedFamily(dinner))
     .filter(dinner => requiredTags.every(tag => hasTag(dinner, tag)))
-    .sort(sortDinnerCandidates)
-
-  return candidates.find(dinner => !usedDinnerNames.has(dinner.name)) ?? candidates[0] ?? null
+    .filter(dinner => !usedDinnerNames.has(dinner.name))
+    .sort(sortDinnerCandidates)[0] ?? null
 }
 
 function renderResults() {
