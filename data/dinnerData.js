@@ -39,6 +39,7 @@ export const dinnerData = [
   { name: 'Fiskegrateng', emoji: '🐟', tags: ['fisk', 'pasta'], likedBy: likedBy() },
   { name: 'Koteletter', emoji: '🍖', tags: ['svinekjøtt', 'lammekjøtt', 'helg', 'grill'], likedBy: likedBy(SLOTH) },
   { name: 'Wok', emoji: '🥢', tags: ['svinekjøtt', 'oksekjøtt', 'kylling'], likedBy: likedBy() },
+  { name: 'Stekt ris', emoji: '🍚', tags: ['oksekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Sushi', emoji: '🍣', tags: ['helg', 'fisk'], likedBy: likedBy() },
   { name: 'Pølser', emoji: '🌭', tags: ['rask', 'svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Tomatsuppe med tilbehør', emoji: '🍅', tags: ['svinekjøtt', 'pasta', 'vegetar'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), preferenceNotes: { kangaroo: 'bare posesuppe' } },
