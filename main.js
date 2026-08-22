@@ -119,6 +119,19 @@ function sortDinnerCandidates(a, b) {
   return likedByCount(b) - likedByCount(a) || a.name.localeCompare(b.name, 'nb')
 }
 
+function shuffled(items) {
+  const next = [...items]
+
+  for (let index = next.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1))
+    const current = next[index]
+    next[index] = next[swapIndex]
+    next[swapIndex] = current
+  }
+
+  return next
+}
+
 function weightedRandomDinner(candidates) {
   if (!candidates.length) return null
 
@@ -160,12 +173,22 @@ function buildSuggestionAttempts({ needsFish, needsVegetarian, quick, weekend })
     ...(quick ? ['rask'] : []),
     ...(weekend ? ['helg'] : [])
   ]
+  const targetAttempts = []
+  const relaxedTargetAttempts = []
 
-  if (needsFish) addAttempt(attempts, ['fisk', ...contextTags])
-  if (needsVegetarian) addAttempt(attempts, ['vegetar', ...contextTags])
+  if (needsFish) {
+    targetAttempts.push(['fisk', ...contextTags])
+    relaxedTargetAttempts.push(['fisk', ...(quick ? ['rask'] : [])])
+  }
+
+  if (needsVegetarian) {
+    targetAttempts.push(['vegetar', ...contextTags])
+    relaxedTargetAttempts.push(['vegetar', ...(quick ? ['rask'] : [])])
+  }
+
+  for (const tags of shuffled(targetAttempts)) addAttempt(attempts, tags)
   if (quick || weekend) addAttempt(attempts, contextTags)
-  if (needsFish) addAttempt(attempts, ['fisk', ...(quick ? ['rask'] : [])])
-  if (needsVegetarian) addAttempt(attempts, ['vegetar', ...(quick ? ['rask'] : [])])
+  for (const tags of shuffled(relaxedTargetAttempts)) addAttempt(attempts, tags)
   if (weekend) addAttempt(attempts, ['helg'])
   if (quick) {
     addAttempt(attempts, ['rask'])
@@ -323,14 +346,13 @@ function suggestPlan() {
 
   for (let weekStart = 0; weekStart < nextPlan.length; weekStart += 7) {
     const weekSlots = nextPlan.slice(weekStart, weekStart + 7)
+    const emptyWeekSlots = shuffled(weekSlots.filter(slot => !slot.dinner))
     const { fishTarget, vegetarianTarget } = getWeekTargets(weekSlots)
 
     let fishCount = weekSlots.filter(slot => slot.dinner && hasTag(slot.dinner, 'fisk')).length
     let vegetarianCount = weekSlots.filter(slot => slot.dinner && hasTag(slot.dinner, 'vegetar')).length
 
-    for (const slot of weekSlots) {
-      if (slot.dinner) continue
-
+    for (const slot of emptyWeekSlots) {
       const weekend = isWeekendDate(slot.date)
       const attempts = buildSuggestionAttempts({
         needsFish: fishCount < fishTarget,
