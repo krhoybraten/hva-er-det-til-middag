@@ -37,7 +37,7 @@ export const dinnerData = [
   { name: 'Kylling i pita', emoji: '🥙', tags: ['kylling'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Lasagne', emoji: '🍝', tags: ['oksekjøtt', 'helg', 'pasta'], likedBy: likedBy(SLOTH, KANGAROO) },
   { name: 'Vårruller', emoji: '🥟', tags: ['oksekjøtt', 'svinekjøtt', 'vegetar', 'kylling'], likedBy: likedBy(SLOTH, FLYING_SQUIRREL) },
-  { name: 'Ferske vårruller', emoji: '🥬', tags: ['oksekjøtt', 'svinekjøtt', 'vegetar', 'kylling'], likedBy: likedBy(SLOTH), recipeUrls: [{url: 'https://www.matprat.no/oppskrifter/familien/ferske-varruller-med-kylling/', name: 'Matprat.no: Ferske vårruller med kylling'}] },
+  { name: 'Ferske vårruller', emoji: '🥬', tags: ['oksekjøtt', 'svinekjøtt', 'vegetar', 'kylling', 'fisk'], likedBy: likedBy(SLOTH), recipeUrls: [{url: 'https://www.matprat.no/oppskrifter/familien/ferske-varruller-med-kylling/', name: 'Matprat.no: Ferske vårruller med kylling'}, {name: 'Godt.no: Sommerruller med laks', url: 'https://www.godt.no/oppskrifter/smaarett/7560/sommerruller-med-laks'}] },
   { name: 'Gyoza', emoji: '🥟', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Gyoza', url: 'https://www.godt.no/oppskrifter/smaarett/7709/gyoza'}] },
   { name: 'Fiskekakewraps', emoji: '🌯', tags: ['fisk', 'rask'], likedBy: likedBy(SLOTH, KANGAROO) },
   { name: 'Nachos', emoji: '🧀', tags: ['oksekjøtt', 'helg', 'rask'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
