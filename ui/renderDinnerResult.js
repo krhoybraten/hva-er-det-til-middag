@@ -1,3 +1,11 @@
+const familyMemberLabels = {
+  sloth: "🦥",
+  giraffe: "🦒",
+  kangaroo: "🦘",
+  lemur: "🦝",
+  "flying-squirrel": "🐿️"
+};
+
 export function renderDinnerResult({
   dinnerResultContainer,
   dinners,
@@ -21,6 +29,16 @@ export function renderDinnerResult({
     addBtn.addEventListener("click", () => onAddToPlan?.(dinner));
 
     li.appendChild(title);
+
+    if (dinner.preferenceNotes) {
+      const notes = document.createElement("p");
+      notes.className = "preference-notes";
+      notes.textContent = Object.entries(dinner.preferenceNotes)
+        .map(([member, note]) => `${familyMemberLabels[member] ?? member}: ${note}`)
+        .join(", ");
+      li.appendChild(notes);
+    }
+
     li.appendChild(addBtn);
 
     if (Array.isArray(dinner.recipeUrls) && dinner.recipeUrls.length > 0) {
