@@ -236,6 +236,27 @@ body{
 }
 #middag a:hover{ text-decoration: underline; }
 
+.liked-by-list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 10px;
+}
+
+.liked-by-emoji{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 4px 6px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--chip);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
 .preference-notes{
   margin: 0 0 10px;
   color: var(--muted);
