@@ -41,7 +41,7 @@ export const dinnerData = [
   { name: 'Steik', emoji: '🥩', tags: ['oksekjøtt', 'svinekjøtt', 'lammekjøtt', 'vilt', 'helg', 'grill'], likedBy: likedBy(SLOTH), recipeUrls: [{name: 'Godt.no: Røkt svinekam med rotgrønnsaker', url: 'https://www.godt.no/oppskrifter/kjoett/svin/13820/roekt-svinekam'}, {name: 'Godt.no: Ytrefilet av svin', url: 'https://www.godt.no/oppskrifter/kjoett/13622/ytrefilet-av-svin'}, {name: 'Godt.no: Oksestek', url: 'https://www.godt.no/oppskrifter/kjoett/storfe/9335/oksestek'}] },
   { name: 'Fiskegrateng', emoji: '🐟', tags: ['fisk', 'pasta'], likedBy: likedBy() },
   { name: 'Koteletter', emoji: '🍖', tags: ['svinekjøtt', 'lammekjøtt', 'helg', 'grill'], likedBy: likedBy(SLOTH) },
-  { name: 'Wok', emoji: '🥢', tags: ['svinekjøtt', 'oksekjøtt', 'kylling'], likedBy: likedBy() },
+  { name: 'Wok', emoji: '🥢', tags: ['svinekjøtt', 'oksekjøtt', 'kylling'], likedBy: likedBy(), recipeUrls: [{name: 'Godt.no: Nudler kylling kung pao', url: 'https://www.godt.no/oppskrifter/wok/9197/nudler-kylling-kung-pao'}] },
   { name: 'Stekt ris', emoji: '🍚', tags: ['oksekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Stekt ris med kjøttdeig', url: 'https://www.godt.no/oppskrifter/ris/12929/stekt-ris-med-kjoettdeig'}] },
   { name: 'Sushi', emoji: '🍣', tags: ['helg', 'fisk'], likedBy: likedBy() },
   { name: 'Pølser', emoji: '🌭', tags: ['rask', 'svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
