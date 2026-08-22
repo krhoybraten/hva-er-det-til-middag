@@ -1,8 +1,24 @@
+function defaultDate() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function formatDate(date) {
+  return new Intl.DateTimeFormat('nb-NO', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short'
+  }).format(new Date(`${date}T12:00:00`));
+}
+
 export function renderDinnerPlan({
   dinnerPlanContainer,
-  dinners,
-  name = "dinner-plan-items",
-  onRemove
+  planSlots = [],
+  defaultStartDate = defaultDate(),
+  defaultNumberOfDays = 7,
+  onCreatePlan,
+  onSuggest,
+  onRemove,
+  onClearSlot
 }) {
   dinnerPlanContainer.innerHTML = "";
 
@@ -10,29 +26,93 @@ export function renderDinnerPlan({
   title.textContent = "Middagsplan";
   dinnerPlanContainer.appendChild(title);
 
-  if (!dinners.length) {
+  const form = document.createElement("form");
+  form.className = "dinner-plan-form";
+
+  const startLabel = document.createElement("label");
+  startLabel.textContent = "Startdato";
+  const startInput = document.createElement("input");
+  startInput.type = "date";
+  startInput.required = true;
+  startInput.value = planSlots[0]?.date ?? defaultStartDate;
+  startLabel.appendChild(startInput);
+
+  const daysLabel = document.createElement("label");
+  daysLabel.textContent = "Dager";
+  const daysInput = document.createElement("input");
+  daysInput.type = "number";
+  daysInput.min = "1";
+  daysInput.max = "31";
+  daysInput.required = true;
+  daysInput.value = String(planSlots.length || defaultNumberOfDays);
+  daysLabel.appendChild(daysInput);
+
+  const createButton = document.createElement("button");
+  createButton.type = "submit";
+  createButton.textContent = planSlots.length ? "Oppdater plan" : "Lag plan";
+
+  form.appendChild(startLabel);
+  form.appendChild(daysLabel);
+  form.appendChild(createButton);
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    onCreatePlan?.(startInput.value, Number(daysInput.value));
+  });
+  dinnerPlanContainer.appendChild(form);
+
+  if (!planSlots.length) {
     const empty = document.createElement("p");
-    empty.textContent = "Ingen middager i planen ennå.";
+    empty.textContent = "Velg startdato og antall dager for å lage en datert plan.";
     dinnerPlanContainer.appendChild(empty);
     return;
   }
 
-  const ul = document.createElement("ul");
-  ul.id = name;
+  const suggestButton = document.createElement("button");
+  suggestButton.type = "button";
+  suggestButton.className = "suggest-plan";
+  suggestButton.textContent = "Foreslå middager";
+  suggestButton.addEventListener("click", () => onSuggest?.());
+  dinnerPlanContainer.appendChild(suggestButton);
 
-  dinners.forEach((dinner, index) => {
+  const ul = document.createElement("ul");
+  ul.id = "dinner-plan-items";
+
+  planSlots.forEach(slot => {
     const li = document.createElement("li");
 
-    const text = document.createElement("span");
-    text.textContent = `${dinner.emoji ?? "🍽️"} ${dinner.name}`;
+    const content = document.createElement("div");
+    content.className = "dinner-plan-slot";
+
+    const date = document.createElement("strong");
+    date.textContent = formatDate(slot.date);
+
+    const dinner = document.createElement("span");
+    dinner.textContent = slot.dinner
+      ? `${slot.dinner.emoji ?? "🍽️"} ${slot.dinner.name}`
+      : "Ledig";
+
+    content.appendChild(date);
+    content.appendChild(dinner);
+
+    const actions = document.createElement("div");
+    actions.className = "dinner-plan-actions";
+
+    if (slot.dinner) {
+      const clearBtn = document.createElement("button");
+      clearBtn.type = "button";
+      clearBtn.textContent = "Tøm";
+      clearBtn.addEventListener("click", () => onClearSlot?.(slot.date));
+      actions.appendChild(clearBtn);
+    }
 
     const removeBtn = document.createElement("button");
     removeBtn.type = "button";
-    removeBtn.textContent = "Fjern";
-    removeBtn.addEventListener("click", () => onRemove?.(index));
+    removeBtn.textContent = "Fjern dag";
+    removeBtn.addEventListener("click", () => onRemove?.(slot.date));
+    actions.appendChild(removeBtn);
 
-    li.appendChild(text);
-    li.appendChild(removeBtn);
+    li.appendChild(content);
+    li.appendChild(actions);
     ul.appendChild(li);
   });
 
