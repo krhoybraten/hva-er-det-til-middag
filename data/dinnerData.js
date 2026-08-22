@@ -30,6 +30,7 @@ export const dinnerData = [
   { name: 'Spaghetti med kjøttsaus', emoji: '🍝', tags: ['oksekjøtt', 'rask', 'pasta'], likedBy: likedBy(KANGAROO) },
   { name: 'Pasta Carbonara', emoji: '🍝', tags: ['svinekjøtt', 'rask', 'pasta'], likedBy: likedBy(SLOTH) },
   { name: 'Pastagrateng med rigatoni', emoji: '🍝', tags: ['pasta'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Godt.no: Pastagrateng med rigatoni', url: 'https://www.godt.no/oppskrifter/pasta/8642/pasta-til-hele-familien'}] },
+  { name: 'Pasta Alfredo', emoji: '🍝', tags: ['pasta'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Godt.no: Pasta Alfredo', url: 'https://www.godt.no/oppskrifter/pasta/4121/pasta-alfredo'}] },
   { name: 'Fleskepannekake', emoji: '🥞', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Pannekaker', emoji: '🥞', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Rømmegrøt', emoji: '🥣', tags: ['vegetar'], likedBy: likedBy(FLYING_SQUIRREL) },
