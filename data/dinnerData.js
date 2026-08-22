@@ -62,7 +62,7 @@ export const dinnerData = [
   { name: 'Finnbiff', emoji: '🦌', tags: ['vilt'], likedBy: likedBy()},
   { name: 'Sosekjøtt', emoji: '🍲', tags: ['oksekjøtt', 'helg'], likedBy: likedBy(), recipeUrls: [{name: 'Matprat: Sosekjøtt', url: 'https://www.matprat.no/oppskrifter/tradisjon/sosekjott/'}] },
   { name: 'Flesk og duppe', emoji: '🥓', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, FLYING_SQUIRREL), recipeUrls: [{name: 'Matprat: Flesk og duppe', url: 'https://www.matprat.no/oppskrifter/tradisjon/flesk-og-duppe/'}]},
-  { name: 'Crispy duck', emoji: '🦆', tags: ['and', 'helg'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Matprat: enkel Crispy duck', url: 'https://www.matprat.no/oppskrifter/gjester/enkel-crispy-duck/'}]},
+  { name: 'Crispy duck', emoji: '🦆', tags: ['and', 'helg'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Matprat: enkel Crispy duck', url: 'https://www.matprat.no/oppskrifter/gjester/enkel-crispy-duck/'}]},
   { name: 'Lammegryte', emoji: '🐑', tags: ['lammekjøtt'], likedBy: likedBy(SLOTH), recipeUrls: [{name: 'Rema 1000: Lammegryte med potetmos og rotgrønnsaker', url: 'https://www.rema.no/oppskrifter/lam-og-farekjott/lammegryte-med-potetmos-og-rotgronnsaker/'}]},
   { name: 'Irish stew', emoji: '🍲', tags: ['lammekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Irish stew', url: 'https://www.godt.no/oppskrifter/gryte/8464/irish-stew'}] },
   { name: 'Shepherd\'s pie', emoji: '🐑', tags: ['lammekjøtt', 'helg'], likedBy: likedBy()}
