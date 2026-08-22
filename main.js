@@ -137,9 +137,10 @@ function weightedRandomDinner(candidates) {
   return weighted.at(-1).dinner
 }
 
-function findSuggestion(requiredTags, usedDinnerNames) {
+function findSuggestion(requiredTags, usedDinnerNames, { weekend = false } = {}) {
   const candidates = dinnerData
     .filter(dinner => matchesSelectedFamily(dinner))
+    .filter(dinner => weekend || !hasTag(dinner, 'helg'))
     .filter(dinner => requiredTags.every(tag => hasTag(dinner, tag)))
     .filter(dinner => !usedDinnerNames.has(dinner.name))
     .sort(sortDinnerCandidates)
@@ -200,16 +201,17 @@ function findSuggestionForSlot(slot, planSlots, usedDinnerNames) {
   const vegetarianCount = weekSlots
     .filter(weekSlot => weekSlot.date !== slot.date && weekSlot.dinner && hasTag(weekSlot.dinner, 'vegetar'))
     .length
+  const weekend = isWeekendDate(slot.date)
 
   const attempts = buildSuggestionAttempts({
     needsFish: fishCount < fishTarget,
     needsVegetarian: vegetarianCount < vegetarianTarget,
     quick: Boolean(slot.quick),
-    weekend: isWeekendDate(slot.date)
+    weekend
   })
 
   return attempts
-    .map(requiredTags => findSuggestion(requiredTags, usedDinnerNames))
+    .map(requiredTags => findSuggestion(requiredTags, usedDinnerNames, { weekend }))
     .find(Boolean)
 }
 
@@ -329,15 +331,16 @@ function suggestPlan() {
     for (const slot of weekSlots) {
       if (slot.dinner) continue
 
+      const weekend = isWeekendDate(slot.date)
       const attempts = buildSuggestionAttempts({
         needsFish: fishCount < fishTarget,
         needsVegetarian: vegetarianCount < vegetarianTarget,
         quick: Boolean(slot.quick),
-        weekend: isWeekendDate(slot.date)
+        weekend
       })
 
       const suggestion = attempts
-        .map(requiredTags => findSuggestion(requiredTags, usedDinnerNames))
+        .map(requiredTags => findSuggestion(requiredTags, usedDinnerNames, { weekend }))
         .find(Boolean)
 
       if (!suggestion) continue
