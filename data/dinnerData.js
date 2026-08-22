@@ -28,7 +28,7 @@ export const dinnerData = [
   { name: 'Pasta Carbonara', emoji: '🍝', tags: ['svinekjøtt', 'rask', 'pasta'], likedBy: likedBy(SLOTH) },
   { name: 'Fleskepannekake', emoji: '🥞', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Pannekaker', emoji: '🥞', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
-  { name: 'Bakt potet', emoji: '🥔', tags: ['svinekjøtt', 'helg'], likedBy: likedBy(), recipeUrls: [{name: 'Godt.no: Bakt potet', url: 'https://www.godt.no/oppskrifter/groennsaker/potet/2537/bakt-potet'}] },
+  { name: 'Bakt potet', emoji: '🥔', tags: ['svinekjøtt', 'helg'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Godt.no: Bakt potet', url: 'https://www.godt.no/oppskrifter/groennsaker/potet/2537/bakt-potet'}] },
   { name: 'Bygg selv-salat', emoji: '🥗', tags: ['kylling', 'rask', 'vegetar'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Kyllingvinger', emoji: '🍗', tags: ['kylling', 'helg', 'rask'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Kylling i pita', emoji: '🥙', tags: ['kylling'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
