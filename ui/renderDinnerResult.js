@@ -6,6 +6,8 @@ const familyMemberLabels = {
   "flying-squirrel": "🐿️"
 };
 
+const familyMemberOrder = Object.keys(familyMemberLabels);
+
 export function renderDinnerResult({
   dinnerResultContainer,
   dinners,
@@ -29,6 +31,22 @@ export function renderDinnerResult({
     addBtn.addEventListener("click", () => onAddToPlan?.(dinner));
 
     li.appendChild(title);
+
+    if (Array.isArray(dinner.likedBy) && dinner.likedBy.length > 0) {
+      const likedByList = document.createElement("div");
+      likedByList.className = "liked-by-list";
+
+      for (const member of familyMemberOrder) {
+        if (!dinner.likedBy.includes(member)) continue;
+
+        const emoji = document.createElement("span");
+        emoji.className = "liked-by-emoji";
+        emoji.textContent = familyMemberLabels[member];
+        likedByList.appendChild(emoji);
+      }
+
+      li.appendChild(likedByList);
+    }
 
     if (dinner.preferenceNotes) {
       const notes = document.createElement("p");
