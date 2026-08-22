@@ -119,12 +119,32 @@ function sortDinnerCandidates(a, b) {
   return likedByCount(b) - likedByCount(a) || a.name.localeCompare(b.name, 'nb')
 }
 
+function weightedRandomDinner(candidates) {
+  if (!candidates.length) return null
+
+  const weighted = candidates.map(dinner => ({
+    dinner,
+    weight: Math.max(1, likedByCount(dinner) + 1)
+  }))
+  const totalWeight = weighted.reduce((sum, candidate) => sum + candidate.weight, 0)
+  let ticket = Math.random() * totalWeight
+
+  for (const candidate of weighted) {
+    ticket -= candidate.weight
+    if (ticket <= 0) return candidate.dinner
+  }
+
+  return weighted.at(-1).dinner
+}
+
 function findSuggestion(requiredTags, usedDinnerNames) {
-  return dinnerData
+  const candidates = dinnerData
     .filter(dinner => matchesSelectedFamily(dinner))
     .filter(dinner => requiredTags.every(tag => hasTag(dinner, tag)))
     .filter(dinner => !usedDinnerNames.has(dinner.name))
-    .sort(sortDinnerCandidates)[0] ?? null
+    .sort(sortDinnerCandidates)
+
+  return weightedRandomDinner(candidates)
 }
 
 function addAttempt(attempts, tags) {
@@ -205,6 +225,8 @@ function createPlan(startDate, numberOfDays) {
 
 function addToPlan(dinner, date) {
   if (!date) return
+  const targetSlot = dinnerPlan.find(slot => slot.date === date)
+  if (targetSlot?.quick && !hasTag(dinner, 'rask')) return
 
   dinnerPlan = dinnerPlan.map(slot =>
     slot.date === date ? { ...slot, dinner } : slot
