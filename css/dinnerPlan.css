@@ -71,7 +71,8 @@
   text-transform: capitalize;
 }
 
-.quick-day-toggle{
+.quick-day-toggle,
+.quick-day-badge{
   width: fit-content;
   display: inline-flex;
   align-items: center;
@@ -84,6 +85,9 @@
   color: var(--muted);
   font-size: .9rem;
   font-weight: 750;
+}
+
+.quick-day-toggle{
   cursor: pointer;
 }
 
@@ -94,7 +98,8 @@
   accent-color: var(--accent2);
 }
 
-.quick-day-toggle:has(input:checked){
+.quick-day-toggle:has(input:checked),
+.quick-day-badge{
   color: var(--text);
   border-color: color-mix(in srgb, var(--accent2), var(--border) 45%);
   background: color-mix(in srgb, var(--accent2), var(--chip) 84%);
