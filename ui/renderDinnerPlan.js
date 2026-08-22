@@ -18,7 +18,8 @@ export function renderDinnerPlan({
   onCreatePlan,
   onSuggest,
   onRemove,
-  onClearSlot
+  onClearSlot,
+  onToggleQuick
 }) {
   dinnerPlanContainer.innerHTML = "";
 
@@ -91,8 +92,18 @@ export function renderDinnerPlan({
       ? `${slot.dinner.emoji ?? "🍽️"} ${slot.dinner.name}`
       : "Ledig";
 
+    const quickLabel = document.createElement("label");
+    quickLabel.className = "quick-day-toggle";
+    const quickInput = document.createElement("input");
+    quickInput.type = "checkbox";
+    quickInput.checked = Boolean(slot.quick);
+    quickInput.addEventListener("change", () => onToggleQuick?.(slot.date, quickInput.checked));
+    quickLabel.appendChild(quickInput);
+    quickLabel.append("Rask dag");
+
     content.appendChild(date);
     content.appendChild(dinner);
+    content.appendChild(quickLabel);
 
     const actions = document.createElement("div");
     actions.className = "dinner-plan-actions";
