@@ -1,4 +1,4 @@
-import { familyMembers } from './data/dinnerData.js'
+import { dinnerData, familyMembers } from './data/dinnerData.js'
 
 import { getTags } from './api/tags.js'
 import { getRandomDinner } from './api/randomDinner.js'
@@ -92,13 +92,60 @@ function replaceText(element, newText) {
   element.textContent = newText
 }
 
+function datePlusDays(startDate, days) {
+  const date = new Date(`${startDate}T12:00:00`)
+  date.setDate(date.getDate() + days)
+  return date.toISOString().slice(0, 10)
+}
+
+function hasTag(dinner, tag) {
+  return dinner.tags?.includes(tag)
+}
+
+function isWeekendDate(date) {
+  const day = new Date(`${date}T12:00:00`).getDay()
+  return day === 0 || day === 5 || day === 6
+}
+
+function matchesSelectedFamily(dinner) {
+  return selectedFamilyMembers.every(member => dinner.likedBy?.includes(member))
+}
+
+function likedByCount(dinner) {
+  return Array.isArray(dinner.likedBy) ? dinner.likedBy.length : 0
+}
+
+function sortDinnerCandidates(a, b) {
+  return likedByCount(b) - likedByCount(a) || a.name.localeCompare(b.name, 'nb')
+}
+
+function findSuggestion(requiredTags, usedDinnerNames) {
+  const candidates = dinnerData
+    .filter(dinner => matchesSelectedFamily(dinner))
+    .filter(dinner => requiredTags.every(tag => hasTag(dinner, tag)))
+    .sort(sortDinnerCandidates)
+
+  return candidates.find(dinner => !usedDinnerNames.has(dinner.name)) ?? candidates[0] ?? null
+}
+
+function renderResults() {
+  if (!dinners.length) return
+
+  renderDinnerResult({
+    dinnerResultContainer,
+    dinners,
+    planSlots: dinnerPlan,
+    onAddToPlan: addToPlan
+  })
+}
+
 search.addEventListener('click', () => {
   dinners = getDinnersByTags(selectedTags, selectedFamilyMembers)
 
   if (!dinners.length) {
     replaceText(middag, 'Fant ingen middager')
   } else {
-    renderDinnerResult({ dinnerResultContainer, dinners, onAddToPlan: addToPlan })
+    renderResults()
   }
 })
 
@@ -110,28 +157,97 @@ randomDinnerBtn.addEventListener('click', () => {
     replaceText(middag, 'Fant ingen middager')
   } else {
     dinners = [one]
-    renderDinnerResult({ dinnerResultContainer, dinners, onAddToPlan: addToPlan })
+    renderResults()
   }
 })
 
-function addToPlan(dinner) {
-  // prevent duplicates by name (optional)
-  if (dinnerPlan.some(d => d.name === dinner.name)) return;
+function createPlan(startDate, numberOfDays) {
+  if (!startDate || !Number.isFinite(numberOfDays) || numberOfDays < 1) return
 
-  dinnerPlan = [...dinnerPlan, dinner];
-  renderPlan();
+  const nextPlan = Array.from({ length: numberOfDays }, (_, index) => {
+    const date = datePlusDays(startDate, index)
+    const existing = dinnerPlan.find(slot => slot.date === date)
+    return { date, dinner: existing?.dinner ?? null }
+  })
+
+  dinnerPlan = nextPlan
+  renderPlan()
+  renderResults()
 }
 
-function removeFromPlan(index) {
-  dinnerPlan = dinnerPlan.filter((_, i) => i !== index);
-  renderPlan();
+function addToPlan(dinner, date) {
+  if (!date) return
+
+  dinnerPlan = dinnerPlan.map(slot =>
+    slot.date === date ? { ...slot, dinner } : slot
+  )
+  renderPlan()
+  renderResults()
+}
+
+function clearPlanSlot(date) {
+  dinnerPlan = dinnerPlan.map(slot =>
+    slot.date === date ? { ...slot, dinner: null } : slot
+  )
+  renderPlan()
+  renderResults()
+}
+
+function removeFromPlan(date) {
+  dinnerPlan = dinnerPlan.filter(slot => slot.date !== date)
+  renderPlan()
+  renderResults()
+}
+
+function suggestPlan() {
+  const nextPlan = dinnerPlan.map(slot => ({ ...slot }))
+  const usedDinnerNames = new Set(nextPlan.map(slot => slot.dinner?.name).filter(Boolean))
+
+  for (let weekStart = 0; weekStart < nextPlan.length; weekStart += 7) {
+    const weekSlots = nextPlan.slice(weekStart, weekStart + 7)
+    const fishTarget = weekSlots.length >= 7 ? 2 : Math.min(2, Math.ceil(weekSlots.length * 2 / 7))
+    const vegetarianTarget = weekSlots.length >= 7 ? 1 : Math.min(1, Math.ceil(weekSlots.length / 7))
+
+    let fishCount = weekSlots.filter(slot => slot.dinner && hasTag(slot.dinner, 'fisk')).length
+    let vegetarianCount = weekSlots.filter(slot => slot.dinner && hasTag(slot.dinner, 'vegetar')).length
+
+    for (const slot of weekSlots) {
+      if (slot.dinner) continue
+
+      const weekend = isWeekendDate(slot.date)
+      const attempts = []
+
+      if (fishCount < fishTarget) attempts.push(weekend ? ['fisk', 'helg'] : ['fisk'])
+      if (vegetarianCount < vegetarianTarget) attempts.push(weekend ? ['vegetar', 'helg'] : ['vegetar'])
+      if (weekend) attempts.push(['helg'])
+      attempts.push([])
+
+      const suggestion = attempts
+        .map(requiredTags => findSuggestion(requiredTags, usedDinnerNames))
+        .find(Boolean)
+
+      if (!suggestion) continue
+
+      slot.dinner = suggestion
+      usedDinnerNames.add(suggestion.name)
+      if (hasTag(suggestion, 'fisk')) fishCount += 1
+      if (hasTag(suggestion, 'vegetar')) vegetarianCount += 1
+    }
+  }
+
+  dinnerPlan = nextPlan
+  renderPlan()
+  renderResults()
 }
 
 function renderPlan() {
   renderDinnerPlan({
     dinnerPlanContainer,
-    dinners: dinnerPlan,
-    onRemove: removeFromPlan
+    planSlots: dinnerPlan,
+    onCreatePlan: createPlan,
+    onSuggest: suggestPlan,
+    onRemove: removeFromPlan,
+    onClearSlot: clearPlanSlot
   });
 }
 
