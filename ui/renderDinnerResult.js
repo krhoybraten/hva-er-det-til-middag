@@ -8,10 +8,19 @@ const familyMemberLabels = {
 
 const familyMemberOrder = Object.keys(familyMemberLabels);
 
+function formatDate(date) {
+  return new Intl.DateTimeFormat('nb-NO', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short'
+  }).format(new Date(`${date}T12:00:00`));
+}
+
 export function renderDinnerResult({
   dinnerResultContainer,
   dinners,
   name = "dinners",
+  planSlots = [],
   onAddToPlan
 }) {
   dinnerResultContainer.innerHTML = "";
@@ -24,11 +33,6 @@ export function renderDinnerResult({
 
     const title = document.createElement("h2");
     title.textContent = `${dinner.emoji ?? "🍽️"} ${dinner.name}`;
-
-    const addBtn = document.createElement("button");
-    addBtn.type = "button";
-    addBtn.textContent = "Legg til i middagplan";
-    addBtn.addEventListener("click", () => onAddToPlan?.(dinner));
 
     li.appendChild(title);
 
@@ -57,7 +61,41 @@ export function renderDinnerResult({
       li.appendChild(notes);
     }
 
-    li.appendChild(addBtn);
+    const addForm = document.createElement("form");
+    addForm.className = "add-to-plan-form";
+
+    const dateSelect = document.createElement("select");
+    dateSelect.required = true;
+
+    if (!planSlots.length) {
+      const option = document.createElement("option");
+      option.textContent = "Lag middagsplan først";
+      option.value = "";
+      dateSelect.appendChild(option);
+      dateSelect.disabled = true;
+    } else {
+      for (const slot of planSlots) {
+        const option = document.createElement("option");
+        option.value = slot.date;
+        option.textContent = slot.dinner
+          ? `${formatDate(slot.date)} - erstatt ${slot.dinner.name}`
+          : `${formatDate(slot.date)} - ledig`;
+        dateSelect.appendChild(option);
+      }
+    }
+
+    const addBtn = document.createElement("button");
+    addBtn.type = "submit";
+    addBtn.textContent = "Legg til i plan";
+    addBtn.disabled = !planSlots.length;
+
+    addForm.appendChild(dateSelect);
+    addForm.appendChild(addBtn);
+    addForm.addEventListener("submit", event => {
+      event.preventDefault();
+      onAddToPlan?.(dinner, dateSelect.value);
+    });
+    li.appendChild(addForm);
 
     if (Array.isArray(dinner.recipeUrls) && dinner.recipeUrls.length > 0) {
       const recipeList = document.createElement("ul");
