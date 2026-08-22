@@ -248,6 +248,7 @@ function toggleQuickDay(date, quick) {
     slot.date === date ? { ...slot, quick } : slot
   )
   renderPlan()
+  renderResults()
 }
 
 function removeFromPlan(date) {
