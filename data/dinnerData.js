@@ -32,6 +32,7 @@ export const dinnerData = [
   { name: 'Pastagrateng med rigatoni', emoji: '🍝', tags: ['pasta'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Godt.no: Pastagrateng med rigatoni', url: 'https://www.godt.no/oppskrifter/pasta/8642/pasta-til-hele-familien'}] },
   { name: 'Fleskepannekake', emoji: '🥞', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Pannekaker', emoji: '🥞', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
+  { name: 'Bacon- og løkpai', emoji: '🥧', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Bacon- og løkpai', url: 'https://www.godt.no/oppskrifter/pai/813/bacon-og-loekpai'}] },
   { name: 'Bakt potet', emoji: '🥔', tags: ['svinekjøtt', 'helg'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Godt.no: Bakt potet', url: 'https://www.godt.no/oppskrifter/groennsaker/potet/2537/bakt-potet'}, {name: 'Godt.no: Jacksonpotet - bakte poteter med bacon', url: 'https://www.godt.no/oppskrifter/groennsaker/potet/1886/tina-nordstr-ms-jacksonpotet-bakte-poteter-med-bacon'}] },
   { name: 'Bygg selv-salat', emoji: '🥗', tags: ['kylling', 'rask', 'vegetar'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Kyllingvinger', emoji: '🍗', tags: ['kylling', 'helg', 'rask'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
