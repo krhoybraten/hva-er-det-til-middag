@@ -7,7 +7,9 @@ export function renderTagCheckboxes({
   tagContainer.innerHTML = "";
 
   for (const tag of tags) {
-    const id = `${name}-${tag}`;
+    const value = typeof tag === "string" ? tag : tag.id;
+    const labelText = typeof tag === "string" ? tag : tag.label;
+    const id = `${name}-${value}`;
 
     const label = document.createElement("label");
     label.style.display = "block";
@@ -15,7 +17,7 @@ export function renderTagCheckboxes({
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.name = name;
-    checkbox.value = tag;
+    checkbox.value = value;
     checkbox.id = id;
 
     if (onChange) {
@@ -23,7 +25,7 @@ export function renderTagCheckboxes({
     }
 
     label.appendChild(checkbox);
-    label.append(` ${tag}`);
+    label.append(` ${labelText}`);
 
     tagContainer.appendChild(label);
   }
