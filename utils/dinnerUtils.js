@@ -9,6 +9,14 @@ function matchesDinner(dinner, requiredTags = [], requiredFamilyMembers = []) {
   );
 }
 
+function likedByCount(dinner) {
+  return Array.isArray(dinner.likedBy) ? dinner.likedBy.length : 0;
+}
+
+function sortByBestMatch(a, b) {
+  return likedByCount(b) - likedByCount(a) || a.name.localeCompare(b.name, 'nb');
+}
+
 export function findRandomDinner(dinners, requiredTags = [], requiredFamilyMembers = []) {
   const matches = dinners.filter(dinner =>
     matchesDinner(dinner, requiredTags, requiredFamilyMembers)
@@ -27,7 +35,7 @@ export function findDinners(dinners, requiredTags = [], requiredFamilyMembers = 
     .filter(dinner =>
       matchesDinner(dinner, requiredTags, requiredFamilyMembers)
     )
-    .sort((a, b) => a.name.localeCompare(b.name, 'nb'));
+    .sort(sortByBestMatch);
 }
 
 export const findRandomDinnerWithTags = findRandomDinner;
