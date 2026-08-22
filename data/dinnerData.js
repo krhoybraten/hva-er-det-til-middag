@@ -51,6 +51,7 @@ export const dinnerData = [
   { name: 'Koteletter', emoji: '🍖', tags: ['svinekjøtt', 'lammekjøtt', 'helg', 'grill'], likedBy: likedBy(SLOTH) },
   { name: 'Wok', emoji: '🥢', tags: ['svinekjøtt', 'oksekjøtt', 'kylling', 'vegetar'], likedBy: likedBy(), recipeUrls: [{name: 'Godt.no: Nudler kylling kung pao', url: 'https://www.godt.no/oppskrifter/wok/9197/nudler-kylling-kung-pao'}, {name: 'Godt.no: Nudler med masse grønnsaker', url: 'https://www.godt.no/oppskrifter/wok/2319/nudler-med-masse-groennsaker'}, {name: 'Godt.no: Asiatisk biff på 1-2-3', url: 'https://www.godt.no/oppskrifter/wok/1310/asiatisk-biff-paa-1-2-3'}] },
   { name: 'Stekt ris', emoji: '🍚', tags: ['oksekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Stekt ris med kjøttdeig', url: 'https://www.godt.no/oppskrifter/ris/12929/stekt-ris-med-kjoettdeig'}] },
+  { name: 'Risotto med kylling', emoji: '🍚', tags: ['kylling'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Risotto med kylling', url: 'https://www.godt.no/oppskrifter/ris/3591/risotto-med-kylling'}] },
   { name: 'Sushi', emoji: '🍣', tags: ['helg', 'fisk'], likedBy: likedBy() },
   { name: 'Pølser', emoji: '🌭', tags: ['rask', 'svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Tomatsuppe med tilbehør', emoji: '🍅', tags: ['svinekjøtt', 'pasta', 'vegetar'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), preferenceNotes: { kangaroo: 'bare posesuppe' } },
