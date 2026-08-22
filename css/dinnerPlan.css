@@ -60,15 +60,27 @@
   opacity: .65;
 }
 
-.dinner-plan-slot{
+#dinner-plan #dinner-plan-items > li{
   display: grid;
-  gap: 4px;
+  align-items: start;
+  justify-content: stretch;
+  gap: 10px;
 }
 
-.dinner-plan-slot strong{
+.dinner-plan-slot-header{
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.dinner-plan-slot-header strong{
   font-size: .9rem;
   color: var(--muted);
   text-transform: capitalize;
+}
+
+.dinner-plan-meal{
+  overflow-wrap: anywhere;
 }
 
 .quick-day-toggle,
@@ -108,13 +120,49 @@
 .dinner-plan-actions{
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
 }
 
 #dinner-plan .dinner-plan-actions button{
   min-height: 38px;
   padding: 8px 10px;
+}
+
+.dinner-plan-details{
+  display: grid;
+  gap: 8px;
+}
+
+.dinner-plan-liked-by{
+  margin: 0;
+}
+
+#dinner-plan .dinner-plan-recipes{
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding-left: 1.15rem;
+  list-style: disc;
+}
+
+#dinner-plan .dinner-plan-recipes li{
+  display: list-item;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+#dinner-plan .dinner-plan-recipes a{
+  color: color-mix(in srgb, var(--accent), var(--text) 18%);
+  text-decoration: none;
+}
+
+#dinner-plan .dinner-plan-recipes a:hover{
+  text-decoration: underline;
 }
 
 @media (max-width: 640px){
@@ -125,7 +173,6 @@
 
   .dinner-plan-actions{
     width: 100%;
-    justify-content: stretch;
   }
 
   .dinner-plan-actions button{
