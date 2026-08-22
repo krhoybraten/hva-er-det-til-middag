@@ -19,7 +19,7 @@ export const dinnerData = [
   { name: 'Hamburger', emoji: '🍔', tags: ['helg', 'oksekjøtt', 'rask', 'grill'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Sliders', emoji: '🍔', tags: ['helg', 'oksekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Sliders - miniburgere', url: 'https://www.godt.no/oppskrifter/burger/6759/sliders-miniburgere'}] },
   { name: 'Pizza', emoji: '🍕', tags: ['helg', 'oksekjøtt', 'svinekjøtt', 'kylling', 'grill'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
-  { name: 'Calzone', emoji: '🍕', tags: ['helg', 'svinekjøtt', 'oksekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Calzone', url: 'https://www.godt.no/oppskrifter/pizza/15046/calzone'}] },
+  { name: 'Calzone', emoji: '🍕', tags: ['helg', 'svinekjøtt', 'oksekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Calzone', url: 'https://www.godt.no/oppskrifter/pizza/15046/calzone'}, {name: 'Godt.no: Calzone med tacofyll', url: 'https://www.godt.no/oppskrifter/pizza/1887/calzone-med-tacofyll'}] },
   { name: 'Taco', emoji: '🌮', tags: ['helg', 'oksekjøtt', 'lammekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Cevapcici', emoji: '🍽️', tags: ['oksekjøtt', 'lammekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Fiskepinner', emoji: '🐟', tags: ['fisk'], likedBy: likedBy(SLOTH, FLYING_SQUIRREL) },
