@@ -17,6 +17,7 @@ export const familyMembers = [
 
 export const dinnerData = [
   { name: 'Hamburger', emoji: '🍔', tags: ['helg', 'oksekjøtt', 'rask', 'grill'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
+  { name: 'Smash burger', emoji: '🍔', tags: ['helg', 'oksekjøtt', 'rask'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'MENY: Smash burger', url: 'https://meny.no/oppskrifter/burger/smash-burger'}] },
   { name: 'Sliders', emoji: '🍔', tags: ['helg', 'oksekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Sliders - miniburgere', url: 'https://www.godt.no/oppskrifter/burger/6759/sliders-miniburgere'}] },
   { name: 'Pizza', emoji: '🍕', tags: ['helg', 'oksekjøtt', 'svinekjøtt', 'kylling', 'grill'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Calzone', emoji: '🍕', tags: ['helg', 'svinekjøtt', 'oksekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Calzone', url: 'https://www.godt.no/oppskrifter/pizza/15046/calzone'}, {name: 'Godt.no: Calzone med tacofyll', url: 'https://www.godt.no/oppskrifter/pizza/1887/calzone-med-tacofyll'}] },
