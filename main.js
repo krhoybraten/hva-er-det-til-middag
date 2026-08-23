@@ -119,6 +119,19 @@ function likedByCount(dinner) {
   return Array.isArray(dinner.likedBy) ? dinner.likedBy.length : 0
 }
 
+function getDefaultRecipeUrl(dinner) {
+  return Array.isArray(dinner?.recipeUrls) && dinner.recipeUrls.length
+    ? dinner.recipeUrls[0].url
+    : null
+}
+
+function getSelectedRecipe(slot) {
+  const recipes = slot.dinner?.recipeUrls
+  if (!Array.isArray(recipes) || recipes.length === 0) return null
+
+  return recipes.find(recipe => recipe.url === slot.selectedRecipeUrl) ?? recipes[0]
+}
+
 function sortDinnerCandidates(a, b) {
   return likedByCount(b) - likedByCount(a) || a.name.localeCompare(b.name, 'nb')
 }
@@ -240,13 +253,12 @@ function foldCalendarLine(line) {
 
 function calendarDescription(slot) {
   const lines = []
+  const selectedRecipe = getSelectedRecipe(slot)
 
   if (slot.quick) lines.push('Rask dag')
-  if (Array.isArray(slot.dinner.recipeUrls) && slot.dinner.recipeUrls.length) {
-    lines.push('Oppskrifter:')
-    for (const recipe of slot.dinner.recipeUrls) {
-      lines.push(`${recipe.name}: ${recipe.url}`)
-    }
+  if (selectedRecipe) {
+    lines.push('Oppskrift:')
+    lines.push(`${selectedRecipe.name}: ${selectedRecipe.url}`)
   }
 
   return lines.join('\n')
@@ -369,6 +381,7 @@ function createPlan(startDate, numberOfDays) {
     return {
       date,
       dinner: existing?.dinner ?? null,
+      selectedRecipeUrl: existing?.selectedRecipeUrl ?? getDefaultRecipeUrl(existing?.dinner),
       quick: existing?.quick ?? false
     }
   })
@@ -384,7 +397,7 @@ function addToPlan(dinner, date) {
   if (targetSlot?.quick && !hasTag(dinner, 'rask')) return
 
   dinnerPlan = dinnerPlan.map(slot =>
-    slot.date === date ? { ...slot, dinner } : slot
+    slot.date === date ? { ...slot, dinner, selectedRecipeUrl: getDefaultRecipeUrl(dinner) } : slot
   )
   renderPlan()
   renderResults()
@@ -392,7 +405,7 @@ function addToPlan(dinner, date) {
 
 function clearPlanSlot(date) {
   dinnerPlan = dinnerPlan.map(slot =>
-    slot.date === date ? { ...slot, dinner: null } : slot
+    slot.date === date ? { ...slot, dinner: null, selectedRecipeUrl: null } : slot
   )
   renderPlan()
   renderResults()
@@ -404,6 +417,13 @@ function toggleQuickDay(date, quick) {
   )
   renderPlan()
   renderResults()
+}
+
+function selectPlanRecipe(date, selectedRecipeUrl) {
+  dinnerPlan = dinnerPlan.map(slot =>
+    slot.date === date ? { ...slot, selectedRecipeUrl } : slot
+  )
+  renderPlan()
 }
 
 function removeFromPlan(date) {
@@ -423,7 +443,7 @@ function suggestPlanSlot(date) {
   if (!suggestion) return
 
   dinnerPlan = dinnerPlan.map(slot =>
-    slot.date === date ? { ...slot, dinner: suggestion } : slot
+    slot.date === date ? { ...slot, dinner: suggestion, selectedRecipeUrl: getDefaultRecipeUrl(suggestion) } : slot
   )
   renderPlan()
   renderResults()
@@ -457,6 +477,7 @@ function suggestPlan() {
       if (!suggestion) continue
 
       slot.dinner = suggestion
+      slot.selectedRecipeUrl = getDefaultRecipeUrl(suggestion)
       usedDinnerNames.add(suggestion.name)
       if (hasTag(suggestion, 'fisk')) fishCount += 1
       if (hasTag(suggestion, 'vegetar')) vegetarianCount += 1
@@ -478,7 +499,8 @@ function renderPlan() {
     onExportCalendar: exportDinnerPlanCalendar,
     onRemove: removeFromPlan,
     onClearSlot: clearPlanSlot,
-    onToggleQuick: toggleQuickDay
+    onToggleQuick: toggleQuickDay,
+    onSelectRecipe: selectPlanRecipe
   });
 }
 
