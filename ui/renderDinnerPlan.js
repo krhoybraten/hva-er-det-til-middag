@@ -38,24 +38,62 @@ function renderLikedBy(dinner) {
   return likedByList;
 }
 
-function renderRecipes(dinner) {
-  if (!Array.isArray(dinner?.recipeUrls) || dinner.recipeUrls.length === 0) return null;
+function getSelectedRecipe(slot) {
+  const recipes = slot.dinner?.recipeUrls;
+  if (!Array.isArray(recipes) || recipes.length === 0) return null;
 
-  const recipeList = document.createElement("ul");
-  recipeList.className = "dinner-plan-recipes";
+  return recipes.find(recipe => recipe.url === slot.selectedRecipeUrl) ?? recipes[0];
+}
 
-  for (const recipe of dinner.recipeUrls) {
+function createRecipeLink(recipe) {
+  const link = document.createElement("a");
+  link.textContent = recipe.name;
+  link.href = recipe.url;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  return link;
+}
+
+function renderRecipes(slot, onSelectRecipe) {
+  const recipes = slot.dinner?.recipeUrls;
+  if (!Array.isArray(recipes) || recipes.length === 0) return null;
+
+  if (recipes.length === 1) {
+    const recipeList = document.createElement("ul");
+    recipeList.className = "dinner-plan-recipes";
     const recipeItem = document.createElement("li");
-    const link = document.createElement("a");
-    link.textContent = recipe.name;
-    link.href = recipe.url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    recipeItem.appendChild(link);
+    recipeItem.appendChild(createRecipeLink(recipes[0]));
     recipeList.appendChild(recipeItem);
+    return recipeList;
   }
 
-  return recipeList;
+  const selectedRecipe = getSelectedRecipe(slot);
+  const recipePicker = document.createElement("label");
+  recipePicker.className = "dinner-plan-recipe-picker";
+  recipePicker.textContent = "Oppskrift";
+
+  const select = document.createElement("select");
+  select.value = selectedRecipe.url;
+
+  for (const recipe of recipes) {
+    const option = document.createElement("option");
+    option.value = recipe.url;
+    option.textContent = recipe.name;
+    select.appendChild(option);
+  }
+
+  select.addEventListener("change", () => onSelectRecipe?.(slot.date, select.value));
+  recipePicker.appendChild(select);
+
+  const selectedLink = document.createElement("div");
+  selectedLink.className = "dinner-plan-selected-recipe";
+  selectedLink.appendChild(createRecipeLink(selectedRecipe));
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "dinner-plan-recipes";
+  wrapper.appendChild(recipePicker);
+  wrapper.appendChild(selectedLink);
+  return wrapper;
 }
 
 export function renderDinnerPlan({
@@ -69,7 +107,8 @@ export function renderDinnerPlan({
   onExportCalendar,
   onRemove,
   onClearSlot,
-  onToggleQuick
+  onToggleQuick,
+  onSelectRecipe
 }) {
   dinnerPlanContainer.innerHTML = "";
 
@@ -211,7 +250,7 @@ export function renderDinnerPlan({
       const likedBy = renderLikedBy(slot.dinner);
       if (likedBy) details.appendChild(likedBy);
 
-      const recipes = renderRecipes(slot.dinner);
+      const recipes = renderRecipes(slot, onSelectRecipe);
       if (recipes) details.appendChild(recipes);
 
       if (details.childElementCount) li.appendChild(details);
