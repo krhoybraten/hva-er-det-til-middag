@@ -37,7 +37,7 @@ export const dinnerData = [
   { name: 'Pasta arrabbiata', emoji: '🍝', tags: ['pasta', 'vegetar', 'rask'], likedBy: likedBy(SLOTH, KANGAROO) },
   { name: 'Pasta al limone', emoji: '🍝', tags: ['pasta', 'vegetar', 'rask'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Matprat: Pasta al limone', url: 'https://www.matprat.no/oppskrifter/kos/pasta-al-limone/'}] },
   { name: 'Fleskepannekake', emoji: '🥞', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
-  { name: 'Pannekaker', emoji: '🥞', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
+  { name: 'Pannekaker', emoji: '🥞', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Matprat: Superraske fylte pannekaker', url: 'https://www.matprat.no/oppskrifter/rask/superraske-fylte-pannekaker/'}] },
   { name: 'Rømmegrøt', emoji: '🥣', tags: ['vegetar', 'meieri'], likedBy: likedBy(FLYING_SQUIRREL) },
   { name: 'Bacon- og løkpai', emoji: '🥧', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Godt.no: Bacon- og løkpai', url: 'https://www.godt.no/oppskrifter/pai/813/bacon-og-loekpai'}] },
   { name: 'Bakt potet', emoji: '🥔', tags: ['svinekjøtt', 'helg'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Godt.no: Bakt potet', url: 'https://www.godt.no/oppskrifter/groennsaker/potet/2537/bakt-potet'}, {name: 'Godt.no: Jacksonpotet - bakte poteter med bacon', url: 'https://www.godt.no/oppskrifter/groennsaker/potet/1886/tina-nordstr-ms-jacksonpotet-bakte-poteter-med-bacon'}] },
