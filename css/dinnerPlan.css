@@ -32,6 +32,7 @@
 
 #dinner-plan .dinner-plan-form button,
 #dinner-plan .suggest-plan,
+#dinner-plan .export-calendar,
 .add-to-plan-form button{
   min-height: 42px;
   padding: 10px 12px;
@@ -43,8 +44,21 @@
   cursor: pointer;
 }
 
-#dinner-plan .suggest-plan{
-  width: 100%;
+#dinner-plan .export-calendar{
+  border-color: color-mix(in srgb, var(--accent), var(--border) 45%);
+  background: color-mix(in srgb, var(--accent), var(--panel) 12%);
+  color: color-mix(in srgb, var(--accent), var(--text) 22%);
+}
+
+#dinner-plan .export-calendar:disabled{
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+.dinner-plan-toolbar{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
   margin: 0 0 14px;
 }
 
@@ -167,7 +181,8 @@
 
 @media (max-width: 640px){
   .dinner-plan-form,
-  .add-to-plan-form{
+  .add-to-plan-form,
+  .dinner-plan-toolbar{
     grid-template-columns: 1fr;
   }
 
