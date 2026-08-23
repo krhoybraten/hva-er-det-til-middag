@@ -98,6 +98,10 @@ function datePlusDays(startDate, days) {
   return date.toISOString().slice(0, 10)
 }
 
+function calendarDate(date) {
+  return date.replaceAll('-', '')
+}
+
 function hasTag(dinner, tag) {
   return dinner.tags?.includes(tag)
 }
@@ -211,6 +215,91 @@ function buildUsedDinnerNames(planSlots, ignoredDate) {
     .filter(slot => slot.date !== ignoredDate)
     .map(slot => slot.dinner?.name)
     .filter(Boolean))
+}
+
+function escapeCalendarText(value) {
+  return String(value)
+    .replace(/\\/g, '\\\\')
+    .replace(/\r?\n/g, '\\n')
+    .replace(/,/g, '\\,')
+    .replace(/;/g, '\\;')
+}
+
+function foldCalendarLine(line) {
+  const chunks = []
+  let remaining = line
+
+  while (remaining.length > 75) {
+    chunks.push(remaining.slice(0, 75))
+    remaining = ` ${remaining.slice(75)}`
+  }
+
+  chunks.push(remaining)
+  return chunks.join('\r\n')
+}
+
+function calendarDescription(slot) {
+  const lines = []
+
+  if (slot.quick) lines.push('Rask dag')
+  if (Array.isArray(slot.dinner.recipeUrls) && slot.dinner.recipeUrls.length) {
+    lines.push('Oppskrifter:')
+    for (const recipe of slot.dinner.recipeUrls) {
+      lines.push(`${recipe.name}: ${recipe.url}`)
+    }
+  }
+
+  return lines.join('\n')
+}
+
+function downloadCalendarFile(filename, content) {
+  const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+
+  link.href = url
+  link.download = filename
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+  URL.revokeObjectURL(url)
+}
+
+function exportDinnerPlanCalendar() {
+  const filledSlots = dinnerPlan.filter(slot => slot.dinner)
+  if (!filledSlots.length) return
+
+  const now = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z')
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Hva er det til middag//Dinner Plan//NO',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'X-WR-CALNAME:Middagsplan'
+  ]
+
+  for (const slot of filledSlots) {
+    lines.push('BEGIN:VEVENT')
+    lines.push(`UID:middag-${slot.date}-${slot.dinner.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') || 'middag'}@hva-er-det-til-middag`)
+    lines.push(`DTSTAMP:${now}`)
+    lines.push(`DTSTART;VALUE=DATE:${calendarDate(slot.date)}`)
+    lines.push(`DTEND;VALUE=DATE:${calendarDate(datePlusDays(slot.date, 1))}`)
+    lines.push(`SUMMARY:${escapeCalendarText(`Middag: ${slot.dinner.name}`)}`)
+
+    const description = calendarDescription(slot)
+    if (description) lines.push(`DESCRIPTION:${escapeCalendarText(description)}`)
+
+    lines.push('END:VEVENT')
+  }
+
+  lines.push('END:VCALENDAR')
+
+  const filename = filledSlots[0]?.date
+    ? `middagsplan-${filledSlots[0].date}.ics`
+    : 'middagsplan.ics'
+
+  downloadCalendarFile(filename, lines.map(foldCalendarLine).join('\r\n'))
 }
 
 function findSuggestionForSlot(slot, planSlots, usedDinnerNames) {
@@ -386,6 +475,7 @@ function renderPlan() {
     onCreatePlan: createPlan,
     onSuggest: suggestPlan,
     onSuggestSlot: suggestPlanSlot,
+    onExportCalendar: exportDinnerPlanCalendar,
     onRemove: removeFromPlan,
     onClearSlot: clearPlanSlot,
     onToggleQuick: toggleQuickDay
