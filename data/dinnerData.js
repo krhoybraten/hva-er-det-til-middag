@@ -43,7 +43,7 @@ export const dinnerData = [
   { name: 'Bakt potet', emoji: '🥔', tags: ['svinekjøtt', 'helg'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Godt.no: Bakt potet', url: 'https://www.godt.no/oppskrifter/groennsaker/potet/2537/bakt-potet'}, {name: 'Godt.no: Jacksonpotet - bakte poteter med bacon', url: 'https://www.godt.no/oppskrifter/groennsaker/potet/1886/tina-nordstr-ms-jacksonpotet-bakte-poteter-med-bacon'}] },
   { name: 'Bygg selv-salat', emoji: '🥗', tags: ['kylling', 'rask', 'vegetar'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Kyllingvinger', emoji: '🍗', tags: ['kylling', 'helg', 'rask'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
-  { name: 'Kylling i pita', emoji: '🥙', tags: ['kylling'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Matprat: Kyllingfilet i grove pitabrød', url: 'https://www.matprat.no/oppskrifter/sunn/kyllingfilet-i-grove-pitabrod/'}] },
+  { name: 'Kylling i pita', emoji: '🥙', tags: ['kylling'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Matprat: Kyllingfilet i grove pitabrød', url: 'https://www.matprat.no/oppskrifter/sunn/kyllingfilet-i-grove-pitabrod/'}, {name: 'Matprat: Kylling i pita', url: 'https://www.matprat.no/oppskrifter/familien/kylling-i-pita/'}] },
   { name: 'Kyllingwraps', emoji: '🌯', tags: ['kylling', 'rask'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Lasagne', emoji: '🍝', tags: ['oksekjøtt', 'helg', 'pasta'], likedBy: likedBy(SLOTH, KANGAROO) },
   { name: 'Vårruller', emoji: '🥟', tags: ['oksekjøtt', 'svinekjøtt', 'vegetar', 'kylling'], likedBy: likedBy(SLOTH, FLYING_SQUIRREL) },
