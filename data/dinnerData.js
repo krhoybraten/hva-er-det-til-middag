@@ -28,7 +28,7 @@ export const dinnerData = [
   { name: 'Ovnsbakt laks', emoji: '🐟', tags: ['fisk'], likedBy: likedBy(KANGAROO) },
   { name: 'Laks i folie', emoji: '🐟', tags: ['fisk', 'rask'], likedBy: likedBy(KANGAROO), recipeUrls: [{name: 'Matprat: Laks i folie', url: 'https://www.matprat.no/oppskrifter/rask/laks-i-folie/'}] },
   { name: 'Laks med sitronpasta', emoji: '🐟', tags: ['fisk', 'pasta', 'rask'], likedBy: likedBy(KANGAROO), recipeUrls: [{name: 'Oda: Laks med kremet sitronpasta', url: 'https://oda.com/no/recipes/5036-silje-feiring-laks-med-kremet-sitronpasta/'}, {name: 'Oda: Laks med pasta og kremet sitronsaus', url: 'https://oda.com/no/recipes/4822-silje-feiring-laks-med-pasta-og-kremet-sitronsaus/'}] },
-  { name: 'Pølselapskaus', emoji: '🍲', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO) },
+  { name: 'Pølselapskaus', emoji: '🍲', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Oda: Superenkel lapskaus med pølser', url: 'https://oda.com/no/recipes/4839-silje-feiring-superenkel-lapskaus-med-polser/'}] },
   { name: 'Fiskeboller', emoji: '🐟', tags: ['fisk', 'rask'], likedBy: likedByFishBalls(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Spaghetti med kjøttsaus', emoji: '🍝', tags: ['oksekjøtt', 'rask', 'pasta'], likedBy: likedBy(KANGAROO) },
   { name: 'Pasta Carbonara', emoji: '🍝', tags: ['svinekjøtt', 'rask', 'pasta'], likedBy: likedBy(SLOTH) },
