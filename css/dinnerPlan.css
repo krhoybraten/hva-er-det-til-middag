@@ -19,7 +19,8 @@
 }
 
 .dinner-plan-form input,
-.add-to-plan-form select{
+.add-to-plan-form select,
+.dinner-plan-recipe-picker select{
   width: 100%;
   min-height: 42px;
   padding: 9px 10px;
@@ -156,10 +157,28 @@
 
 #dinner-plan .dinner-plan-recipes{
   display: grid;
-  gap: 4px;
+  gap: 6px;
   margin: 0;
   padding-left: 1.15rem;
   list-style: disc;
+}
+
+#dinner-plan div.dinner-plan-recipes{
+  padding-left: 0;
+  list-style: none;
+}
+
+.dinner-plan-recipe-picker{
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: .9rem;
+  font-weight: 750;
+}
+
+.dinner-plan-selected-recipe{
+  font-size: .95rem;
+  overflow-wrap: anywhere;
 }
 
 #dinner-plan .dinner-plan-recipes li{
