@@ -73,7 +73,7 @@ export const dinnerData = [
   { name: 'Ramen', emoji: '🍜', tags: ['kylling'], likedBy: likedBy(SLOTH), recipeUrls: [{name: 'Godt.no: Ramen nudelsuppe med kylling', url: 'https://www.godt.no/oppskrifter/suppe/7508/ramen-nudelsuppe-med-kylling'}] },
   { name: 'Lammelår', emoji: '🍖', tags: ['lammekjøtt', 'helg', 'grill'], likedBy: likedBy(SLOTH), recipeUrls: [{name: 'Godt.no: Langtidsstekt lammelår', url: 'https://www.godt.no/oppskrifter/kjoett/lam/11180/langtidsstekt-lammelaar'}] },
   { name: 'Frossenpizza', emoji: '🍕', tags: ['svinekjøtt', 'oksekjøtt', 'rask'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
-  { name: 'Pasta med pesto', emoji: '🌿', tags: ['svinekjøtt', 'kylling', 'fisk', 'pasta', 'rask', 'vegetar'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Matprat: Pasta med skinke, pesto og ruccula', url: 'https://www.matprat.no/oppskrifter/rask/pasta-med-skinke-pesto-og-ruccula/'}] },
+  { name: 'Pasta med pesto', emoji: '🌿', tags: ['svinekjøtt', 'kylling', 'fisk', 'pasta', 'rask', 'vegetar'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Matprat: Pasta med skinke, pesto og ruccula', url: 'https://www.matprat.no/oppskrifter/rask/pasta-med-skinke-pesto-og-ruccula/'}, {name: 'MENY: Pasta med pesto og laks', url: 'https://meny.no/oppskrifter/pasta/pasta-med-pesto-og-laks'}] },
   { name: 'Chicken nuggets', emoji: '🍗', tags: ['kylling', 'rask'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL)},
   { name: 'Finnbiff', emoji: '🦌', tags: ['vilt'], likedBy: likedBy()},
   { name: 'Sosekjøtt', emoji: '🍲', tags: ['oksekjøtt', 'helg'], likedBy: likedBy(), recipeUrls: [{name: 'Matprat: Sosekjøtt', url: 'https://www.matprat.no/oppskrifter/tradisjon/sosekjott/'}] },
