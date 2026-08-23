@@ -66,6 +66,7 @@ export function renderDinnerPlan({
   onCreatePlan,
   onSuggest,
   onSuggestSlot,
+  onExportCalendar,
   onRemove,
   onClearSlot,
   onToggleQuick
@@ -117,12 +118,25 @@ export function renderDinnerPlan({
     return;
   }
 
+  const planActions = document.createElement("div");
+  planActions.className = "dinner-plan-toolbar";
+
   const suggestButton = document.createElement("button");
   suggestButton.type = "button";
   suggestButton.className = "suggest-plan";
   suggestButton.textContent = "Foreslå middager";
   suggestButton.addEventListener("click", () => onSuggest?.());
-  dinnerPlanContainer.appendChild(suggestButton);
+  planActions.appendChild(suggestButton);
+
+  const exportButton = document.createElement("button");
+  exportButton.type = "button";
+  exportButton.className = "export-calendar";
+  exportButton.textContent = "Eksporter kalender";
+  exportButton.disabled = !planSlots.some(slot => slot.dinner);
+  exportButton.addEventListener("click", () => onExportCalendar?.());
+  planActions.appendChild(exportButton);
+
+  dinnerPlanContainer.appendChild(planActions);
 
   const ul = document.createElement("ul");
   ul.id = "dinner-plan-items";
