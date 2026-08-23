@@ -1,4 +1,4 @@
-const CACHE_NAME = 'middag-app-v6';
+const CACHE_NAME = 'middag-app-v7';
 const BASE_PATH = '/hva-er-det-til-middag/';
 
 const ASSETS = [
@@ -6,6 +6,7 @@ const ASSETS = [
   `${BASE_PATH}index.html`,
   `${BASE_PATH}main.js`,
   `${BASE_PATH}css/style.css`,
+  `${BASE_PATH}css/dinnerPlan.css`,
   `${BASE_PATH}manifest.webmanifest`,
   `${BASE_PATH}data/dinnerData.js`,
   `${BASE_PATH}api/getDinnersByTags.js`,
