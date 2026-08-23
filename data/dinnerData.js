@@ -36,6 +36,7 @@ export const dinnerData = [
   { name: 'Cannelloni', emoji: '🍝', tags: ['pasta', 'helg'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Godt.no: Cannelloni', url: 'https://www.godt.no/oppskrifter/pasta/4169/cannelloni'}] },
   { name: 'Pasta arrabbiata', emoji: '🍝', tags: ['pasta', 'vegetar', 'rask'], likedBy: likedBy(SLOTH, KANGAROO) },
   { name: 'Pasta al limone', emoji: '🍝', tags: ['pasta', 'vegetar', 'rask'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Matprat: Pasta al limone', url: 'https://www.matprat.no/oppskrifter/kos/pasta-al-limone/'}] },
+  { name: 'Pasta med røkt skinke og soltørkede tomater', emoji: '🍝', tags: ['pasta', 'svinekjøtt', 'rask'], likedBy: likedBy(SLOTH, KANGAROO), recipeUrls: [{name: 'Matprat: Pasta med røkt skinke og soltørkede tomater', url: 'https://www.matprat.no/oppskrifter/rask/pasta-med-rokt-skinke-og-soltorkede-tomater/'}] },
   { name: 'Fleskepannekake', emoji: '🥞', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL) },
   { name: 'Pannekaker', emoji: '🥞', tags: ['svinekjøtt'], likedBy: likedBy(SLOTH, KANGAROO, FLYING_SQUIRREL), recipeUrls: [{name: 'Matprat: Superraske fylte pannekaker', url: 'https://www.matprat.no/oppskrifter/rask/superraske-fylte-pannekaker/'}] },
   { name: 'Rømmegrøt', emoji: '🥣', tags: ['vegetar', 'meieri'], likedBy: likedBy(FLYING_SQUIRREL) },
