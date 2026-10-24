@@ -73,7 +73,6 @@ function renderRecipes(slot, onSelectRecipe) {
   recipePicker.textContent = "Oppskrift";
 
   const select = document.createElement("select");
-  select.value = selectedRecipe.url;
 
   for (const recipe of recipes) {
     const option = document.createElement("option");
@@ -81,6 +80,7 @@ function renderRecipes(slot, onSelectRecipe) {
     option.textContent = recipe.name;
     select.appendChild(option);
   }
+  select.value = selectedRecipe.url;
 
   select.addEventListener("change", () => onSelectRecipe?.(slot.date, select.value));
   recipePicker.appendChild(select);
@@ -105,6 +105,7 @@ export function renderDinnerPlan({
   onSuggest,
   onSuggestSlot,
   onExportCalendar,
+  getShareLink,
   onRemove,
   onClearSlot,
   onToggleQuick,
@@ -175,7 +176,29 @@ export function renderDinnerPlan({
   exportButton.addEventListener("click", () => onExportCalendar?.());
   planActions.appendChild(exportButton);
 
-  dinnerPlanContainer.appendChild(planActions);
+  if (getShareLink) {
+    const shareButton = document.createElement('button');
+    shareButton.type = 'button';
+    shareButton.textContent = 'Del plan';
+    const shareLabel = document.createElement('label');
+    shareLabel.hidden = true;
+    shareLabel.textContent = 'Kopier lenken for å dele planen';
+    const shareInput = document.createElement('input');
+    shareInput.type = 'url';
+    shareInput.readOnly = true;
+    shareLabel.appendChild(shareInput);
+    shareButton.addEventListener('click', () => {
+      shareInput.value = getShareLink();
+      shareLabel.hidden = false;
+      shareInput.focus();
+      shareInput.select();
+    });
+    planActions.appendChild(shareButton);
+    dinnerPlanContainer.appendChild(planActions);
+    dinnerPlanContainer.appendChild(shareLabel);
+  } else {
+    dinnerPlanContainer.appendChild(planActions);
+  }
 
   const ul = document.createElement("ul");
   ul.id = "dinner-plan-items";
